@@ -14,7 +14,8 @@
             placemsg = #{placemsg},
             username = #{username},
             createtime = #{createtime},
-            yue = #{yue}
+            yue = #{yue},
+            hot = #{hot}
         </set>
     </insert>
 
@@ -25,6 +26,9 @@
                 name like concat("%", #{text}, "%")
                 or
                 placemsg like  concat("%", #{text}, "%")
+            </if>
+            <if test="hot != null">
+                hot = #{hot}
             </if>
         </where>
         order by createtime desc
@@ -54,6 +58,9 @@
             </if>
              <if test="yue != null ">
                  yue = #{yue},
+            </if>
+            <if test="hot != null ">
+                hot = #{hot},
             </if>
         </set>
         where id = #{id}

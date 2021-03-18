@@ -43,16 +43,19 @@ public class Yueball {
      */
     private String username;
 
+    private Integer hot;
+
     public Yueball() {
     }
 
-    public Yueball(String name, String imgsrc, String placemsg, Date createtime, Integer yue, String username) {
+    public Yueball(String name, String imgsrc, String placemsg, Date createtime, Integer yue, String username, Integer hot) {
         this.name = name;
         this.imgsrc = imgsrc;
         this.placemsg = placemsg;
         this.createtime = createtime;
         this.yue = yue;
         this.username = username;
+        this.hot = hot;
     }
 
     public Integer getId() {
@@ -109,5 +112,13 @@ public class Yueball {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Integer getHot() {
+        return hot;
+    }
+
+    public void setHot(Integer hot) {
+        this.hot = hot;
     }
 }

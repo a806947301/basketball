@@ -16,9 +16,9 @@ public interface UserService {
      * 登录
      * @param username
      * @param password
-     * @return
+     * @return  如果登录成功，则返回user对象
      */
-    public boolean login(String username, String password);
+    public User  login(String username, String password);
 
     /**
      * 更新

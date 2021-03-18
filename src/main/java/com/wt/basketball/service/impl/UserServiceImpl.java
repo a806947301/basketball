@@ -20,12 +20,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public User login(String username, String password) {
         User user = get(username);
-        if (password.equals(user.getPassword())) {
-            return true;
+        if (null != user && password.equals(user.getPassword())) {
+            return user;
         }
-        return false;
+        return null;
     }
 
     @Override

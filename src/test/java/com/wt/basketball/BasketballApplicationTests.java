@@ -36,7 +36,7 @@ class BasketballApplicationTests {
 
 //        boolean result = userMapper.add(new User("wt1", "1", "梧桐1", "13800138000", "wut1@qq.com", 0));
 
-        boolean result1 = userService.login("wt", "123");
+        User wt1 = userService.login("wt", "123");
         System.out.println(users);
     }
 

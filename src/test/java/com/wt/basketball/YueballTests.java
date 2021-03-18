@@ -15,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -34,13 +35,13 @@ class YueballTests {
 
 //        List<Article> articles = articleMapper.selectAll("标2");
 
-        Yueball addY = new Yueball("xx球场", "/img/1.jpg", "球场详细信息在这里", new Date(), 10, "wt");
+        Yueball addY = new Yueball("xx球场", "/img/1.jpg", "球场详细信息在这里", new Date(), 10, "wt", 0);
 
         boolean add = yueballMapper.add(addY);
 
         Yueball yueball = yueballMapper.get(1);
 
-        List<Yueball> yueballs = yueballMapper.selectAll(null);
+        List<Yueball> yueballs = yueballMapper.selectAll(null, 0);
 
         Yueball y = new Yueball();
         y.setId(1);
@@ -53,6 +54,16 @@ class YueballTests {
 
 
         System.out.println(1);
+    }
+
+
+    @Test
+    public void batchAdd() {
+        Random r = new Random();
+        for (int i = 0; i < 20; i++) {
+            Yueball addY = new Yueball(r.nextInt(100) + "xx球场" , "/img/1.jpg", "球场详细信息在这里", new Date(), 0, r.nextBoolean() ? "wt" : "wt1", r.nextInt(2));
+            yueballMapper.add(addY);
+        }
     }
 
 }

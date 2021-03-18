@@ -19,7 +19,7 @@ public interface YueballMapper {
      * @param text
      * @return
      */
-    List<Yueball> selectAll(@Param("text") String text);
+    List<Yueball> selectAll(@Param("text") String text, @Param("hot") Integer hot);
 
     /**
      * 查一个

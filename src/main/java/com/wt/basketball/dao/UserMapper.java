@@ -11,6 +11,13 @@ public interface UserMapper {
     List<User> selectAll();
 
     /**
+     * 根据约球信息查询
+     * @param ballid
+     * @return
+     */
+    List<User> selectByBall(@Param("ballid") Integer ballid);
+
+    /**
      * 根据username获取
      * @param username
      * @return

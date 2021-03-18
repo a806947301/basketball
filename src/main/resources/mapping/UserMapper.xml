@@ -9,6 +9,19 @@
         select * from user
     </select>
 
+
+    <select id="selectByBall" resultMap="BaseResultMap">
+        select u.* from user as u join yue on u.username = yue.username
+        <where>
+            <if test="ballid != null">
+                ballid = #{ballid}
+            </if>
+        </where>
+        order by yue.createtime desc
+    </select>
+
+
+
     <select id="get" resultMap="BaseResultMap">
         select * from user where username = #{username}
     </select>

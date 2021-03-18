@@ -2,6 +2,8 @@ package com.wt.basketball.service;
 
 import com.wt.basketball.model.User;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * 获取单个
@@ -17,4 +19,18 @@ public interface UserService {
      * @return
      */
     public boolean login(String username, String password);
+
+    /**
+     * 更新
+     * @param user
+     * @return
+     */
+    public boolean update(User user);
+
+    /**
+     * 查询
+     * @param ballid
+     * @return
+     */
+    public List<User> search(Integer ballid);
 }

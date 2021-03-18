@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wt.basketball.dao.YueballMapper">
+
+    <resultMap id="BaseResultMap" type="com.wt.basketball.model.Yueball">
+    </resultMap>
+
+
+    <insert id="add">
+        insert into yueball
+        <set>
+            name = #{name},
+            imgsrc = #{imgsrc},
+            placemsg = #{placemsg},
+            username = #{username},
+            createtime = #{createtime},
+            yue = #{yue}
+        </set>
+    </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from yueball
+        <where>
+            <if test="text != null and text != ''">
+                name like concat("%", #{text}, "%")
+                or
+                placemsg like  concat("%", #{text}, "%")
+            </if>
+        </where>
+        order by createtime desc
+    </select>
+
+    <select id="get" resultMap="BaseResultMap">
+        select * from yueball where id = #{id}
+    </select>
+
+    <update id="update">
+        update yueball
+        <set>
+            <if test="name != null and name != ''">
+                name = #{name},
+            </if>
+            <if test="imgsrc != null and imgsrc != ''">
+                imgsrc = #{imgsrc},
+            </if>
+            <if test="placemsg != null and placemsg != ''">
+                placemsg = #{placemsg},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="createtime != null ">
+                createtime = #{createtime},
+            </if>
+             <if test="yue != null ">
+                 yue = #{yue},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from yueball where id = #{id}
+    </delete>
+
+    <insert id="yue">
+        insert into yue values
+        (#{ballid}, #{username}, now())
+    </insert>
+</mapper>

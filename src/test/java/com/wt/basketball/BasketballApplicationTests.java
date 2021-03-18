@@ -30,10 +30,11 @@ class BasketballApplicationTests {
     public void testSelect() {
         List<User> users = userMapper.selectAll();
 
+        userMapper.selectByBall(1)
         User wt = userMapper.get("wt");
 
 
-        boolean result = userMapper.add(new User("wt1", "1", "梧桐1", "13800138000", "wut1@qq.com", 0));
+//        boolean result = userMapper.add(new User("wt1", "1", "梧桐1", "13800138000", "wut1@qq.com", 0));
 
         boolean result1 = userService.login("wt", "123");
         System.out.println(users);

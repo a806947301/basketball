@@ -1,8 +1,8 @@
 package com.wt.basketball;
 
 import com.wt.basketball.service.UserService;
-import com.wt.basketball.dao.UserMapper;
-import com.wt.basketball.model.User;
+import com.wt.basketball.dao.ArticleMapper;
+import com.wt.basketball.model.Article;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,32 +11,31 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
-import java.util.List;
+import java.util.Date;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @WebAppConfiguration
-class BasketballApplicationTests {
+class ArticleTests {
 
 
 
     @Resource
-    private UserMapper userMapper;
+    private ArticleMapper articleMapper;
 
     @Autowired
     private UserService userService;
 
     @Test
     public void testSelect() {
-        List<User> users = userMapper.selectAll();
+       // boolean addr = articleMapper.add(new Article("标题", "内容内容", new Date(), "wt", 1));
 
-        User wt = userMapper.get("wt");
+//        List<Article> articles = articleMapper.selectAll("标2");
 
-
-        boolean result = userMapper.add(new User("wt1", "1", "梧桐1", "13800138000", "wut1@qq.com", 0));
-
-        boolean result1 = userService.login("wt", "123");
-        System.out.println(users);
+        Article a = new Article("这是一个title", "cont", new Date(), "wt1", 2);
+        a.setId(1);
+        boolean update = articleMapper.update(a);
+        System.out.println(1);
     }
 
 }

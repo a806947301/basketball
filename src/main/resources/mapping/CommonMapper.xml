@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wt.basketball.dao.CommonMapper">
+
+    <resultMap id="BaseResultMap" type="com.wt.basketball.model.Common">
+    </resultMap>
+
+    <insert id="add">
+        insert into common
+        <set>
+            content = #{content},
+            createtime = #{createtime},
+            username = #{username},
+            type = #{type},
+            cwho = #{cwho},
+        </set>
+    </insert>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from common
+        <where>
+            <if test="cwho != null">
+                cwho = #{cwho}
+            </if>
+        </where>
+        order by createtime desc
+    </select>
+
+    <select id="get" resultMap="BaseResultMap">
+        select * from common where id = #{id}
+    </select>
+
+    <update id="update">
+        update common
+        <set>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+            <if test="good != null">
+                good = #{good},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="type != null">
+                type = #{type},
+            </if>
+            <if test="cwho != null">
+                cwho = #{cwho}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+        delete from common where id = #{id}
+    </delete>
+</mapper>

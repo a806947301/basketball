@@ -35,4 +35,20 @@
         </set>
         where username = #{username}
     </update>
+
+    <insert id="add">
+        insert into user
+        <set>
+            username = #{username},
+            password = #{password},
+            nickname = #{nickname},
+            phone = #{phone},
+            email = #{email},
+            isadmin = #{isadmin}
+        </set>
+    </insert>
+
+    <delete id="delete">
+        delete from user where username = #{username}
+    </delete>
 </mapper>

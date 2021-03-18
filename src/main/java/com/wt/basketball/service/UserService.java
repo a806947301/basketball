@@ -1,4 +1,4 @@
-package com.wt.basketball.controller.service;
+package com.wt.basketball.service;
 
 import com.wt.basketball.model.User;
 

@@ -1,9 +1,8 @@
-package com.wt.basketball.controller.service.impl;
+package com.wt.basketball.service.impl;
 
-
-import com.wt.basketball.controller.service.UserService;
 import com.wt.basketball.dao.UserMapper;
 import com.wt.basketball.model.User;
+import com.wt.basketball.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

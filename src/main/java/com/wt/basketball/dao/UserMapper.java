@@ -23,4 +23,18 @@ public interface UserMapper {
      * @return
      */
     boolean update(User user);
+
+    /**
+     * 添加用户
+     * @param user
+     * @return
+     */
+    boolean add(User user);
+
+    /**
+     * 删除
+     * @param username
+     * @return
+     */
+    boolean delete(@Param("username") String username);
 }

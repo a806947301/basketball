@@ -23,6 +23,12 @@
             <if test="text != null and text != ''">
                 title like concat("%", #{text}, "%")
             </if>
+            <if test="type != null">
+                and type = #{type}
+            </if>
+            <if test="pushhot != null">
+                and pushhot = #{pushhot}
+            </if>
         </where>
         order by createtime desc
     </select>

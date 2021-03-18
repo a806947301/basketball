@@ -2,6 +2,7 @@ package com.wt.basketball.dao;
 
 import com.wt.basketball.model.Article;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author wut
  * @since 2021-03-18
  */
+@Repository
 public interface ArticleMapper {
 
     boolean add(Article article);
@@ -18,7 +20,8 @@ public interface ArticleMapper {
      * @param text
      * @return
      */
-    List<Article> selectAll(@Param("text") String text);
+    List<Article> selectAll(@Param("text") String text, @Param("type") Integer type,
+                            @Param("pushhot")Integer pushhot);
 
     /**
      * 查一个

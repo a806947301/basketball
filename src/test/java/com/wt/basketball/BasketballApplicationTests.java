@@ -30,7 +30,7 @@ class BasketballApplicationTests {
     public void testSelect() {
         List<User> users = userMapper.selectAll();
 
-        userMapper.selectByBall(1)
+        userMapper.selectByBall(1);
         User wt = userMapper.get("wt");
 
 

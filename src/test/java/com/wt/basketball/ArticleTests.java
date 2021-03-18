@@ -12,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.Random;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -36,6 +37,15 @@ class ArticleTests {
         a.setId(1);
         boolean update = articleMapper.update(a);
         System.out.println(1);
+    }
+
+    @Test
+    public void addMore() {
+        Random r = new Random();
+        for (int i = 0; i < 10; i++) {
+            Article news = new Article("这是一个新闻" + i, "一大堆字", new Date(), r.nextBoolean() ? "wt1" : "wt", 3);
+            articleMapper.add(news);
+        }
     }
 
 }

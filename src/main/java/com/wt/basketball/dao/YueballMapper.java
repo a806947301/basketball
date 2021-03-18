@@ -2,6 +2,7 @@ package com.wt.basketball.dao;
 
 import com.wt.basketball.model.Yueball;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -9,6 +10,7 @@ import java.util.List;
  * @author wut
  * @since 2021-03-18
  */
+@Repository
 public interface YueballMapper {
     boolean add(Yueball yueball);
 

@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @RequestMapping("/user")
 @RestController
@@ -17,6 +18,15 @@ public class UserController {
 
     @Autowired
     private UserService service;
+
+    /**
+     * 用户列表
+     * @return
+     */
+    @GetMapping("/users")
+    public List<User> users() {
+        return service.search(null);
+    }
 
     @PostMapping("/login")
     public boolean login(String username , String password, HttpServletRequest request) {

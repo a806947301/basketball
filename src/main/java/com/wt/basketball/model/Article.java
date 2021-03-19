@@ -1,6 +1,7 @@
 package com.wt.basketball.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 
@@ -60,6 +61,19 @@ public class Article {
         this.createtime = createtime;
         this.username = username;
         this.type = type;
+    }
+
+    public boolean verify() {
+        if (StringUtils.isEmpty(title)) {
+            return false;
+        }
+        if (StringUtils.isEmpty(content)) {
+            return false;
+        }
+        if (StringUtils.isEmpty(type)) {
+            return false;
+        }
+        return true;
     }
 
     public Integer getId() {

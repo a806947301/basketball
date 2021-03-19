@@ -28,7 +28,7 @@ public interface ArticleMapper {
      * @param id
      * @return
      */
-    Article get(@Param("id") String id);
+    Article get(@Param("id") Integer id);
 
     /**
      * 更新

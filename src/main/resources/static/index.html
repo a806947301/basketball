@@ -29,26 +29,6 @@
             return("");
         }
 
-        function dateFormat(date) {
-            let fmt = "YYYY-mm-dd"
-            let ret;
-            const opt = {
-                "Y+": date.getFullYear().toString(),        // 年
-                "m+": (date.getMonth() + 1).toString(),     // 月
-                "d+": date.getDate().toString(),            // 日
-                "H+": date.getHours().toString(),           // 时
-                "M+": date.getMinutes().toString(),         // 分
-                "S+": date.getSeconds().toString()          // 秒
-                // 有其他格式化字符需求可以继续添加，必须转化成字符串
-            };
-            for (let k in opt) {
-                ret = new RegExp("(" + k + ")").exec(fmt);
-                if (ret) {
-                    fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
-                };
-            };
-            return fmt;
-        }
     </script>
 </head>
 <body >
@@ -124,6 +104,7 @@
                                 <a href="#"><span>{{user.nickname}}</span></a>
                                 <ul>
                                     <li><a href="javascript:void(0);" data-toggle="modal" data-target="#editMeModal" v-on:click="edit">修改个人信息</a></li>
+                                    <li><a href="myfriend.html">我的球友</a></li>
                                     <li><a href="userpage.html" v-if="islogin && user.isadmin==1">用户管理</a></li>
 
                                     <li><a href="javascript:void(0);" v-on:click="logout">退出登录</a></li>
@@ -174,6 +155,9 @@
                                 if (currentUser.user != "") {
                                     addnew.user = response.data;
                                     currentUser.islogin = true;
+                                    if (currentUser.user.isadmin == 1) {
+                                        news.isadmin = true;
+                                    }
                                 }
                             })
 
@@ -203,7 +187,7 @@
 
                 <!--搜索框-->
                 <div class="tt-search">
-                    <form class="search-wrapper" action="" onsubmit="searchnew()" id="searchForm">
+                    <form class="search-wrapper" action="" id="searchForm">
                         <div class="search-form">
                             <input type="text" class="tt-search__input" name="text" placeholder="输入查询的新闻">
                             <button class="tt-search__btn" type="submit">
@@ -211,12 +195,7 @@
                                     <use xlink:href="#icon-search"></use>
                                 </svg>
                             </button>
-                            <script>
-                                function searchnew() {
-                                    /*let text = $("input[name='searchtext']").val();
-                                    $("#searchForm").attr("action","index.html?text=" + text)*/
-                                }
-                            </script>
+
                             <button class="tt-search__close">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-cancel"></use>
@@ -287,7 +266,7 @@
                                             <div class="tt-item">
                                                 <div class="tt-item-header">
                                                     <ul class="tt-list-badge">
-                                                        <li><a href="#"><span class="tt-color16 tt-badge">新闻</span></a></li>
+                                                        <li><a href="javascript:void(0);"><span class="tt-color16 tt-badge">新闻</span></a></li>
                                                     </ul>
                                                     <h6 class="tt-title"><a :href="'newsdetail.html?id='+n.id">{{n.createtime}}</a></h6>
                                                 </div>
@@ -296,19 +275,22 @@
                                                        <a :href="'newsdetail.html?id='+n.id">{{n.title}}</a>
                                                    </div>
                                                     <div class="row">
-                                                        <div class="tt-innerwrapper col-2">
+                                                        <div class="tt-innerwrapper col-4">
                                                             <a href="#" class="tt-btn-icon">
-                                                                <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+                                                                <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg>0</i>
                                                             </a>
                                                         </div>
 
-                                                        <div class="tt-innerwrapper col-10" align="right">
-                                                            <a href="#" class="tt-btn-icon"><span class="tt-badge">{{n.user.nickname}}</span></a>
-                                                        </div>
+
 
                                                     </div>
 
-
+                                                    <div class="tt-innerwrapper row" align="right" v-if="isadmin">
+                                                        <a :href="'writenews.html?id='+n.id" class="tt-btn-icon col-4"><span class="tt-badge tt-color07">修改</span></a>
+                                                        <a href="javascript:void(0);" v-on:click="deleteNews(n.id)" class="tt-btn-icon col-4"><span class="tt-badge tt-color08">删除</span></a>
+                                                        <a href="javascript:void(0);" v-on:click="hot(n.id)" class="tt-btn-icon col-4" v-if="n.pushhot==0"><span class="tt-badge tt-color09">热门</span></a>
+                                                        <a href="javascript:void(0);" v-on:click="nohot(n.id)" class="tt-btn-icon col-4" v-if="n.pushhot==1"><span class="tt-badge tt-color10">取热</span></a>
+                                                    </div>
 
                                                 </div>
                                             </div>
@@ -325,7 +307,46 @@
                         var news = new Vue({
                             el: '#newspage',
                             data: {
-                                list:[]
+                                list:[],
+                                isadmin: false
+                            },
+                            methods: {
+                                deleteNews: function (id) {
+                                    axios.delete("/article/article?id=" + id)
+                                    .then(res=>{
+                                        if (res.data == true) {
+                                            location.reload();
+                                            return ;
+                                        }
+                                        alert("删除失败，请登录后再试")
+                                    })
+                                },
+                                hot: function (id) {
+                                    params = new URLSearchParams();
+                                    params.append("id", id);
+                                    params.append("pushhot", 1)
+                                    axios.post("/article/article", params)
+                                    .then(res=>{
+                                        if (res.data == true) {
+                                            location.reload();
+                                            return ;
+                                        }
+                                        alert("失败")
+                                    })
+                                },
+                                nohot: function (id) {
+                                    params = new URLSearchParams();
+                                    params.append("id", id);
+                                    params.append("pushhot", 0)
+                                    axios.post("/article/article", params)
+                                        .then(res=>{
+                                            if (res.data == true) {
+                                                location.reload();
+                                                return ;
+                                            }
+                                            alert("失败")
+                                        })
+                                }
                             },
                             /*创建时调用*/
                             created: function () {

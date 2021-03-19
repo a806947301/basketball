@@ -1,12 +1,15 @@
 package com.wt.basketball.controller;
 
+import com.wt.basketball.model.Article;
+import com.wt.basketball.model.User;
 import com.wt.basketball.model.vo.ArticleVo;
 import com.wt.basketball.service.ArticleService;
+import com.wt.basketball.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -27,7 +30,7 @@ public class ArticleController {
      */
     @GetMapping("/news")
     public List<ArticleVo> newsPage(String text) {
-        return service.selectNews(text, 0);
+        return service.selectNews(text, null);
     }
 
     /**
@@ -47,7 +50,7 @@ public class ArticleController {
      */
     @GetMapping("/tech")
     public List<ArticleVo> techPage(String text) {
-        return service.selectTech(text, 0);
+        return service.selectTech(text, null);
     }
 
     /**
@@ -67,7 +70,7 @@ public class ArticleController {
      */
     @GetMapping("/common")
     public List<ArticleVo> commonPage(String text) {
-        return service.selectCommon(text, 0);
+        return service.selectCommon(text, null);
     }
 
     /**
@@ -78,5 +81,76 @@ public class ArticleController {
     @GetMapping("/hotcommon")
     public List<ArticleVo> hotcommon() {
         return service.selectCommon(null, 1);
+    }
+
+
+    /**
+     * 获取一个
+     * @param id
+     * @return
+     */
+    @GetMapping("/article")
+    public ArticleVo get(Integer id) {
+        return service.get(id);
+    }
+
+    /**
+     * 删除
+     * @param id
+     * @return
+     */
+    @DeleteMapping("/article")
+    public boolean delete(Integer id, HttpServletRequest request) {
+        if (null == id) {
+            return false;
+        }
+
+        // 判断登录
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser || currentUser.getIsadmin() != 1) {
+            return false;
+        }
+
+        return service.delete(id);
+    }
+
+    /**
+     * 添加
+     * @param article
+     * @param request
+     * @return
+     */
+    @PutMapping("/article")
+    public boolean add(Article article, HttpServletRequest request) {
+        if (null == article || (!article.verify())) {
+            return false;
+        }
+
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser) {
+            return false;
+        }
+
+        return service.add(article, currentUser);
+    }
+
+    /**
+     * 更新
+     * @param article
+     * @param request
+     * @return
+     */
+    @PostMapping("/article")
+    public boolean update(Article article, HttpServletRequest request) {
+        if (null == article || StringUtils.isEmpty(article.getId())) {
+            return false;
+        }
+
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser) {
+            return false;
+        }
+
+        return service.update(article, currentUser);
     }
 }

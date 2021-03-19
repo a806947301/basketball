@@ -12,6 +12,8 @@ public class ArticleVo extends Article {
 
     User user;
 
+    private Boolean myArticle;
+
     public ArticleVo(Article article, User user) {
         BeanUtils.copyProperties(article, this);
         this.user = user;
@@ -23,5 +25,13 @@ public class ArticleVo extends Article {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Boolean getMyArticle() {
+        return myArticle;
+    }
+
+    public void setMyArticle(Boolean myArticle) {
+        this.myArticle = myArticle;
     }
 }

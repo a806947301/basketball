@@ -43,7 +43,8 @@ class ArticleTests {
     public void addMore() {
         Random r = new Random();
         for (int i = 0; i < 10; i++) {
-            Article news = new Article("这是一个新闻" + i, "一大堆字", new Date(), r.nextBoolean() ? "wt1" : "wt", 3);
+            Article news = new Article("这是一个技术区文章" + i, "文章哈哈哈", new Date(), r.nextBoolean() ? "wt1" : "wt", 1);
+            news.setPushhot(r.nextInt(2));
             articleMapper.add(news);
         }
     }

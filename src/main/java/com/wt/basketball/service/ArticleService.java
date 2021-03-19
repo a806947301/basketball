@@ -1,5 +1,7 @@
 package com.wt.basketball.service;
 
+import com.wt.basketball.model.Article;
+import com.wt.basketball.model.User;
 import com.wt.basketball.model.vo.ArticleVo;
 
 import java.util.List;
@@ -32,5 +34,35 @@ public interface ArticleService {
      * @return
      */
     List<ArticleVo> selectCommon(String text, Integer pushhot);
+
+    /**
+     * 获取一个
+     * @param id
+     * @return
+     */
+    ArticleVo get(Integer id);
+
+    /**
+     * 删除文章
+     * @param id
+     * @return
+     */
+    boolean delete(Integer id);
+
+    /**
+     * 更新文章
+     * @param article
+     * @param currentUser
+     * @return
+     */
+    boolean update(Article article, User currentUser);
+
+    /**
+     * 添加
+     * @param article
+     * @param currentUser
+     * @return
+     */
+    boolean add(Article article, User currentUser);
 
 }

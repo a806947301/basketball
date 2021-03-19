@@ -1,7 +1,7 @@
 /*---------------------------------------*/
 /*--------   Table of contents   --------*/
 /*
-¸ü¶à¾«Æ·Ä£°åÇë·ÃÎÊ£ºhttp://www.bootstrapmb.com
+ï¿½ï¿½ï¿½à¾«Æ·Ä£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê£ï¿½http://www.bootstrapmb.com
 1. External module
 	1.1 Bootstrap
 	1.2 Magnific Popup
@@ -3933,6 +3933,18 @@ hr {
     .btn.btn-color02:hover {
       background-color: #333333;
       color: #ffffff; }
+  .btn.btn-color03 {
+    background-color: #f4555b;
+    color: #ffffff; }
+  .btn.btn-color03:hover {
+    background-color: #c7254e;
+    color: #ffffff; }
+.btn.btn-color04 {
+  background-color: #333333;
+  color: #ffffff; }
+.btn.btn-color04:hover {
+  background-color: #e2e7ea;
+  color: #182730; }
   .btn:focus {
     outline: none; }
   .btn i {

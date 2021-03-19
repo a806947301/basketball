@@ -2,6 +2,7 @@ package com.wt.basketball.controller;
 
 import com.wt.basketball.model.Article;
 import com.wt.basketball.model.User;
+import com.wt.basketball.model.vo.ArticleDetailVo;
 import com.wt.basketball.model.vo.ArticleVo;
 import com.wt.basketball.service.ArticleService;
 import com.wt.basketball.util.SessionUtil;
@@ -83,6 +84,20 @@ public class ArticleController {
         return service.selectCommon(null, 1);
     }
 
+
+    /**
+     * 文章详情
+     * @param id
+     * @return
+     */
+    @GetMapping("/detail")
+    public ArticleDetailVo detail(Integer id) {
+        if (null == id) {
+            return null;
+        }
+
+        return service.getDetail(id);
+    }
 
     /**
      * 获取一个

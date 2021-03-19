@@ -277,12 +277,10 @@
                                                     <div class="row">
                                                         <div class="tt-innerwrapper col-4">
                                                             <a href="#" class="tt-btn-icon">
-                                                                <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg>0</i>
+                                                                <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
+                                                                {{n.read}}
                                                             </a>
                                                         </div>
-
-
-
                                                     </div>
 
                                                     <div class="tt-innerwrapper row" align="right" v-if="isadmin">
@@ -485,7 +483,7 @@
                                                 </div>
                                                 <!--一条推荐-->
                                                 <div class="tt-col-description" v-for="n in list">
-                                                    <h6 class="tt-title"><a href="#">
+                                                    <h6 class="tt-title"><a :href="'newsdetail.html?id='+n.id">
                                                         {{n.title}}
                                                     </a></h6>
                                                 </div>

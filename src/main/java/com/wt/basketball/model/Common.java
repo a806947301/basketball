@@ -1,5 +1,7 @@
 package com.wt.basketball.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -20,10 +22,11 @@ public class Common {
     /**
      * 创建时间
      */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd hh:mm:ss")
     private Date createtime;
 
     /**
-     * 阅读数
+     * 点赞数
      */
     private Integer good;
 
@@ -32,10 +35,6 @@ public class Common {
      */
     private String username;
 
-    /**
-     * 类型，1为文章评论，2为新闻文章
-     */
-    private Integer type;
 
     /**
      * 评论谁
@@ -45,11 +44,10 @@ public class Common {
     public Common() {
     }
 
-    public Common(String content, Date createtime, String username, Integer type, Integer cwho) {
+    public Common(String content, Date createtime, String username, Integer cwho) {
         this.content = content;
         this.createtime = createtime;
         this.username = username;
-        this.type = type;
         this.cwho = cwho;
     }
 
@@ -91,14 +89,6 @@ public class Common {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
     }
 
     public Integer getCwho() {

@@ -43,4 +43,11 @@ public interface ArticleMapper {
      * @return
      */
     boolean delete(@Param("id") int id);
+
+    /**
+     * 增加阅读数
+     * @param id
+     * @return
+     */
+    boolean addRead(@Param("id") int id);
 }

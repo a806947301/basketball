@@ -23,12 +23,12 @@
         select * from yueball
         <where>
             <if test="text != null and text != ''">
-                name like concat("%", #{text}, "%")
+                (name like concat("%", #{text}, "%")
                 or
-                placemsg like  concat("%", #{text}, "%")
+                placemsg like  concat("%", #{text}, "%"))
             </if>
             <if test="hot != null">
-                hot = #{hot}
+                and hot = #{hot}
             </if>
         </where>
         order by createtime desc

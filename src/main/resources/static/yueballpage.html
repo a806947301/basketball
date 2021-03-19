@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Forum - Responsive HTML5 Template</title>
+    <title>约球区</title>
     <meta name="keywords" content="HTML5 Template">
     <meta name="description" content="Forum - Responsive HTML5 Template">
     <meta name="author" content="Forum">
@@ -10,6 +10,26 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/style.css">
+
+    <!--vue-->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!--axios-->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+                var pair = vars[i].split("=");
+                if(pair[0] == variable){return pair[1];}
+            }
+            return("");
+        }
+
+    </script>
 </head>
 <body>
 <!-- tt-mobile menu -->
@@ -36,7 +56,7 @@
                 <!-- toggle mobile menu -->
                 <a class="toggle-mobile-menu" href="#">
                     <svg class="tt-icon">
-                      <use xlink:href="#icon-menu_icon"></use>
+                        <use xlink:href="#icon-menu_icon"></use>
                     </svg>
                 </a>
                 <!-- /toggle mobile menu -->
@@ -46,159 +66,163 @@
                 </div>
                 <!-- /logo -->
                 <!-- desctop menu -->
-                  <div class="tt-desktop-menu">
+                <div class="tt-desktop-menu">
                     <nav>
                         <ul>
-                            <li><a href="page-categories.html"><span>Categories</span></a></li>
-                            <li><a href="page-tabs.html"><span>Trending</span></a></li>
-                            <li><a href="page-create-topic.html"><span>New</span></a></li>
+                            <li><a href="index.html"><span>新闻区</span></a></li>
+                            <li><a href="techpage.html"><span>技术区</span></a></li>
+                            <li><a href="commonpage.html"><span>讨论区</span></a></li>
                             <li>
-                                <a href="page-single-user.html"><span>Pages</span></a>
-                                <ul>
-                                    <li><a href="index.html">Home</a></li>
-                                    <li><a href="page-single-topic.html">Single Topic</a></li>
-                                    <li><a href="page-create-topic.html">Create Topic</a></li>
-                                    <li><a href="page-single-user.html">Single User Activity</a></li>
-                                    <li><a href="page-single_threads.html">Single User Threads</a></li>
-                                    <li><a href="page-single_replies.html">Single User Replies</a></li>
-                                    <li><a href="page-single_followers.html">Single User Followers</a></li>
-                                    <li><a href="page-single_categories.html">Single User Categories</a></li>
-                                    <li><a href="page-single_settings.html">Single User Settings</a></li>
-                                    <li><a href="page-signup.html">Sign up</a></li>
-                                    <li><a href="page-login.html">Log in</a></li>
-                                    <li><a href="page-categories.html">Categories</a></li>
-                                    <li><a href="page-categories-single.html">Single Category</a></li>
-                                    <li><a href="page-tabs.html">About</a></li>
-                                    <li><a href="page-tabs_guidelines.html">Guidelines</a></li>
-                                    <li><a href="_demo_modal-advancedSearch.html">Advanced Search</a></li>
-                                    <li><a href="error404.html">Error 404</a></li>
-                                    <li><a href="_demo_modal-age-confirmation.html">Age Verification</a></li>
-                                    <li><a href="_demo_modal-level-up.html">Level up Notification</a></li>
-                                    <li><a href="messages-page.html">Message</a></li>
-                                    <li><a href="messages-compose.html">Message Compose</a></li>
-                                </ul>
+                                <a href="yueballpage.html"><span>约球区</span></a>
+
                             </li>
                         </ul>
                     </nav>
                 </div>
                 <!-- /desctop menu -->
                 <!-- tt-search -->
-                <div class="tt-search">
-                    <!-- toggle -->
-                    <button class="tt-search-toggle" data-toggle="modal" data-target="#modalAdvancedSearch">
-                       <svg class="tt-icon">
-                          <use xlink:href="#icon-search"></use>
-                        </svg>
-                    </button>
-                    <!-- /toggle -->
-                    <form class="search-wrapper">
-                        <div class="search-form">
-                            <input type="text" class="tt-search__input" placeholder="Search">
-                            <button class="tt-search__btn" type="submit">
-                               <svg class="tt-icon">
-                                  <use xlink:href="#icon-search"></use>
-                                </svg>
-                            </button>
-                             <button class="tt-search__close">
-                               <svg class="tt-icon">
-                                  <use xlink:href="#cancel"></use>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="search-results">
-                            <div class="tt-search-scroll">
-                                <ul>
-                                    <li>
-                                        <a href="page-single-topic.html">
-                                            <h6 class="tt-title">Rdr2 secret easter eggs</h6>
-                                            <div class="tt-description">
-                                               Here’s what I’ve found in Red Dead Redem..
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                       <a href="page-single-topic.html">
-                                            <h6 class="tt-title">Top 10 easter eggs in Red Dead Rede..</h6>
-                                            <div class="tt-description">
-                                                You can find these easter eggs in Red Dea..
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                       <a href="page-single-topic.html">
-                                            <h6 class="tt-title">Red Dead Redemtion: Arthur Morgan..</h6>
-                                            <div class="tt-description">
-                                                Here’s what I’ve found in Red Dead Redem..
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="page-single-topic.html">
-                                            <h6 class="tt-title">Rdr2 secret easter eggs</h6>
-                                            <div class="tt-description">
-                                               Here’s what I’ve found in Red Dead Redem..
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                       <a href="page-single-topic.html">
-                                            <h6 class="tt-title">Top 10 easter eggs in Red Dead Rede..</h6>
-                                            <div class="tt-description">
-                                                You can find these easter eggs in Red Dea..
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li>
-                                       <a href="page-single-topic.html">
-                                            <h6 class="tt-title">Red Dead Redemtion: Arthur Morgan..</h6>
-                                            <div class="tt-description">
-                                                Here’s what I’ve found in Red Dead Redem..
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <button type="button" class="tt-view-all" data-toggle="modal" data-target="#modalAdvancedSearch">Advanced Search</button>
-                        </div>
-                    </form>
-                </div>
+
                 <!-- /tt-search -->
             </div>
             <div class="col-auto ml-auto">
-                 <div class="tt-user-info d-flex justify-content-center">
+                <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                         <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
                     </div>
-                    <div class="custom-select-01">
-                        <select>
-                            <option value="Default Sorting">azyrusmax</option>
-                            <option value="value 01">value 01</option>
-                            <option value="value 02">value 02</option>
-                        </select>
-                    </div>
                 </div>
             </div>
+            <!--如果登录了要显示用户名-->
+            <div id="currentUser">
+                <div class="tt-desktop-menu custom-select-01"  v-if="islogin">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{{user.nickname}}</span></a>
+                                <ul>
+                                    <li><a href="javascript:void(0);" data-toggle="modal" data-target="#editMeModal" v-on:click="edit">修改个人信息</a></li>
+                                    <li><a href="myfriend.html">我的球友</a></li>
+                                    <li><a href="userpage.html" v-if="islogin && user.isadmin==1">用户管理</a></li>
+
+                                    <li><a href="javascript:void(0);" v-on:click="logout">退出登录</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <!--没有登录-->
+                <div class="tt-desktop-menu"  v-if="!islogin">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="login.html"><span>立即登录</span></a>
+
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+            <script>
+                currentUser = new Vue({
+                    el: '#currentUser',
+                    data: {
+                        user:{},
+                        islogin: false
+                    },
+                    methods: {
+                        logout: function () {
+                            axios.post("/user/logout")
+                                .then(function(response){
+                                    if (response.data == true) {
+                                        location.reload();
+                                    }
+                                })
+                        },
+                        edit: function () {
+                            editMeModal.user = currentUser.user;
+                        }
+                    },
+                    /*创建时调用*/
+                    created: function () {
+                        axios.get('/user/current')
+                            .then(function (response) {
+                                currentUser.user = response.data;
+                                if (currentUser.user != "") {
+                                    currentUser.islogin = true;
+                                    yueballPage.islogin =true;
+                                    addButton.islogin = true;
+                                    if (currentUser.user.isadmin == 1) {
+                                        yueballPage.isadmin = true;
+                                    }
+                                }
+                            })
+
+                    }
+                })
+            </script>
         </div>
+
     </div>
 </header>
 <main id="tt-pageContent">
-    <div class="container">
-        <div class="tt-single-topic-list">
-
-            <div class="tt-item row">
-                <div class="col-2"></div>
-                <div class="col-8" align="center">
-                    <h2>约球区</h2>
+    <div class="tt-wrapper-section">
+        <div class="container">
+            <div class="tt-user-header">
+                <div class="tt-col-avatar">
+                    <div class="tt-icon">
+                        <svg class="tt-icon">
+                            <use xlink:href="#icon-ava-d"></use>
+                        </svg>
+                    </div>
                 </div>
-                <div class="col-2" align="right">
-                    <a href="#" class="btn btn-primary">添加约球信息</a>
+                <div class="tt-col-title">
+                    <div class="tt-title">
+                        约球区
+                    </div>
                 </div>
 
+                <!--搜索框-->
+                <div class="tt-search">
+                    <form class="search-wrapper" action="">
+                        <div class="search-form">
+                            <input type="text" class="tt-search__input" name="text" placeholder="输入搜索内容">
+                            <button class="tt-search__btn" type="submit">
+                                <svg class="tt-icon">
+                                    <use xlink:href="#icon-search"></use>
+                                </svg>
+                            </button>
+                            <button class="tt-search__close">
+                                <svg class="tt-icon">
+                                    <use xlink:href="#icon-cancel"></use>
+                                </svg>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-2" align="right" id="addButton">
+                    <a href="writeyueball.html" class="btn btn-primary">添加约球信息</a>
+                </div>
+                <script>
+                    addButton = new Vue({
+                        el: '#addButton',
+                        data: {
+                            islogin: false
+                        }
+                    })
+                </script>
             </div>
-            <div class="tt-item tt-wrapper-success">
+        </div>
+
+    </div>
+    <div class="container" id="yueballPage">
+        <div class="tt-single-topic-list">
+            <!--一条信息-->
+            <div class="tt-item tt-wrapper-success" v-for="n in list">
                  <div class="tt-single-topic">
                     <div class="tt-item-header pt-noborder">
                         <div class="tt-item-info info-top">
@@ -206,164 +230,188 @@
                                 <i class="tt-icon"><svg><use xlink:href="#icon-ava-h"></use></svg></i>
                             </div>
                             <div class="tt-avatar-title">
-                               <a href="#">用户名</a>
+                               <a href="javascript:void(0);">{{n.user.nickname}}</a>
                             </div>
                             <a href="#" class="tt-info-time">
-                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>6 Jan,2019
+                                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>{{n.createtime}}
                             </a>
                         </div>
                     </div>
                     <div class="tt-item-description">
-                        <h3><a href="#">xxx球场</a></h3>
+                        <h3><a :href="'yuedetail.html?id='+n.id">{{n.name}}</a></h3>
                     </div>
 
+                     <div class="row">
+                         <div class="col-8">
+                             <p>{{n.placemsg.substr(0, 70)}}</p>
+                         </div>
+                         <div class="col-2"></div>
+                     </div>
+
+
                 </div>
+
+                <div class="row">
+                    <div class="col-5 row" align="center">
+                        <div class="col-3"></div>
+                        &nbsp;
+                        <a href="javascript:void(0);" class="tt-btn-icon">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-user"></use></svg></i>
+                            {{n.yue}}
+                        </a>
+                    </div>
+                    <a :href="'writeyueball.html?id='+n.id" type="button" class="btn btn-color05 col-1" v-if="isadmin || n.myYue">修改</a>
+                    <div class="col-1"></div>
+                    <button type="button" class="btn btn-color03 col-1" v-on:click="deleteYueball(n.id)" v-if="isadmin || n.myYue">删除</button>
+                    <div class="col-1"></div>
+                    <button type="button" class="btn btn-color04 col-1" v-on:click="hot(n.id)" v-if="isadmin && n.hot==0">设为热门</button>
+                    <button type="button" class="btn btn-primary col-1" v-on:click="nohot(n.id)" v-if="isadmin && n.hot==1">取消热门</button>
+                </div>
+                <br>
             </div>
 
 
-
-
         </div>
-
-
-
-
     </div>
+    <script>
+        var yueballPage = new Vue({
+            el: '#yueballPage',
+            data: {
+                list:[],
+                isadmin: false,
+                islogin: false
+            },
+            methods: {
+                deleteYueball: function (id) {
+                    axios.delete("/yue/yueball?id=" + id)
+                        .then(res=>{
+                            if (res.data == true) {
+                                location.reload();
+                                return ;
+                            }
+                            alert("删除失败，请登录后再试")
+                        })
+                },
+                hot: function (id) {
+                    params = new URLSearchParams();
+                    params.append("id", id);
+                    params.append("hot", 1)
+                    axios.post("/yue/yueball", params)
+                        .then(res=>{
+                            if (res.data == true) {
+                                location.reload();
+                                return ;
+                            }
+                            alert("失败")
+                        })
+                },
+                nohot: function (id) {
+                    params = new URLSearchParams();
+                    params.append("id", id);
+                    params.append("hot", 0)
+                    axios.post("/yue/yueball", params)
+                        .then(res=>{
+                            if (res.data == true) {
+                                location.reload();
+                                return ;
+                            }
+                            alert("失败")
+                        })
+                }
+            },
+            /*创建时调用*/
+            created: function () {
+                text = getQueryVariable("text")
+                axios.get('/yue/list?text=' + text)
+                    .then(function (response) {
+                        yueballPage.list = response.data;
+                    })
+
+            }
+        })
+    </script>
 </main>
 
-<a href="page-create-topic.html" class="tt-btn-create-topic">
-    <span class="tt-icon">
-        <svg>
-          <use xlink:href="#icon-create_new"></use>
-        </svg>
-    </span>
-</a>
 
-<div class="modal fade" id="modalAdvancedSearch" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="tt-modal-advancedSearch">
-				<div class="tt-modal-title">
-					<i class="pt-icon">
-						<svg>
-							<use xlink:href="#icon-advanced_search"></use>
-						</svg>
-					</i>
-					Advanced Search
-					<a class="pt-close-modal" href="#" data-dismiss="modal">
-						<svg class="icon">
-							<use xlink:href="#icon-cancel"></use>
-						</svg>
-					</a>
-				</div>
-				<form class="form-default">
-					<div class="form-group">
-						<i class="pt-customInputIcon">
-                           <svg class="tt-icon">
-                              <use xlink:href="#icon-search"></use>
-                            </svg>
-                        </i>
-						<input type="text" name="name" class="form-control pt-customInputSearch" id="searchForum" placeholder="Search all forums">
-					</div>
-					<div class="form-group">
-						<label for="searchName">Posted by</label>
-						<input type="text" name="name" class="form-control" id="searchName" placeholder="Username">
-					</div>
-					<div class="form-group">
-						<label for="searchCategory">In Category</label>
-						<input type="text" name="name" class="form-control" id="searchCategory" placeholder="Add Category">
-					</div>
-					<div class="checkbox-group">
-				        <input type="checkbox" id="searcCheckBox01" name="checkbox">
-				        <label for="searcCheckBox01">
-				            <span class="check"></span>
-				            <span class="box"></span>
-				            <span class="tt-text">Include all tags</span>
-				        </label>
-				    </div>
-					<div class="form-group">
-						<label>Only return topics/posts that...</label>
-						<div class="checkbox-group">
-					        <input type="checkbox" id="searcCheckBox02" name="checkbox">
-					        <label for="searcCheckBox02">
-					            <span class="check"></span>
-					            <span class="box"></span>
-					            <span class="tt-text">I liked</span>
-					        </label>
-					    </div>
-					    <div class="checkbox-group">
-					        <input type="checkbox" id="searcCheckBox03" name="checkbox">
-					        <label for="searcCheckBox03">
-					            <span class="check"></span>
-					            <span class="box"></span>
-					            <span class="tt-text">are in my messages</span>
-					        </label>
-					    </div>
-					    <div class="checkbox-group">
-					        <input type="checkbox" id="searcCheckBox04" name="checkbox">
-					        <label for="searcCheckBox04">
-					            <span class="check"></span>
-					            <span class="box"></span>
-					            <span class="tt-text">I’ve read</span>
-					        </label>
-					    </div>
-					</div>
-					<div class="form-group">
-						<select class="form-control" id="searchTop">
-							<option>any</option>
-							<option>value 01</option>
-							<option>value 02</option>
-							<option>value 03</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="searchaTopics">Where topics</label>
-						<select class="form-control" id="searchaTopics">
-							<option>any</option>
-							<option>value 01</option>
-							<option>value 02</option>
-							<option>value 03</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<label for="searchAdvTime">Posted</label>
-						<div class="row">
-							<div class="col-6">
-								<select class="form-control">
-									<option>any</option>
-									<option>value 01</option>
-									<option>value 02</option>
-									<option>value 03</option>
-								</select>
-							</div>
-							<div class="col-6">
-								<input type="text" name="name" class="form-control" id="searchAdvTime" placeholder="dd-mm-yyyy">
-							</div>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="minPostCount">Minimum Post Count</label>
-						<select class="form-control" id="minPostCount">
-							<option>1</option>
-							<option>2</option>
-							<option>3</option>
-							<option>4</option>
-							<option>5</option>
-							<option>6</option>
-							<option>7</option>
-							<option>8</option>
-							<option>9</option>
-							<option selected>10</option>
-						</select>
-					</div>
-					<div class="form-group">
-						<a href="#" class="btn btn-secondary btn-block">Search</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+
+<!-- 编辑个人信息模态框（Modal） -->
+<div class="modal fade " id="editMeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">编辑我的个人信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="tt-loginpages-wrapper">
+                    <form class="form-default">
+                        <div class="form-group">
+                            <label for="username">用户名</label>
+                            <input type="text" name="name" class="form-control" id="username" disabled v-model="user.username">
+                        </div>
+                        <div class="form-group">
+                            <label for="nickname">昵称</label>
+                            <input type="text" name="name" class="form-control" id="nickname" v-model="user.nickname">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">邮箱</label>
+                            <input type="text" name="name" class="form-control" id="email" v-model="user.email">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">手机号</label>
+                            <input type="password" name="name" class="form-control" id="phone" v-model="user.phone">
+                        </div>
+                        <div class="form-group">
+                            <a href="javascript:void(0);" class="btn btn-secondary btn-block" v-on:click="edit">修改我的账户</a>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <label for="password">密码</label>
+                            <input type="password" name="name" class="form-control" id="password" placeholder="************">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary container-fluid">修改我的密码</button>
+            </div>
+        </div>
+    </div>
 </div>
+<script>
+    editMeModal = new Vue({
+        el: '#editMeModal',
+        data: {
+            user:{}
+        },
+        methods: {
+            edit: function () {
+                const params = new URLSearchParams();
+                params.append('username', editMeModal.user.username);
+                params.append('nickname', editMeModal.user.nickname);
+                params.append('email', editMeModal.user.email);
+                params.append('phone', editMeModal.user.phone);
+
+                axios.post("/user/update", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data == true) {
+                            location.reload();
+                        } else {
+                            alert("您权限不足")
+                        }
+                    })
+            }
+        },
+        /*创建时调用*/
+        created: function () {
+
+        }
+    })
+</script>
 <script src="js/bundle.js"></script>
 <svg width="0" height="0" class="hidden">
 	 <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">

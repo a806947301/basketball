@@ -2,6 +2,7 @@ package com.wt.basketball.service;
 
 import com.wt.basketball.model.Article;
 import com.wt.basketball.model.User;
+import com.wt.basketball.model.vo.ArticleDetailVo;
 import com.wt.basketball.model.vo.ArticleVo;
 
 import java.util.List;
@@ -43,6 +44,13 @@ public interface ArticleService {
     ArticleVo get(Integer id);
 
     /**
+     * 获取详情（包括评论）
+     * @param id
+     * @return
+     */
+    ArticleDetailVo getDetail(Integer id);
+
+    /**
      * 删除文章
      * @param id
      * @return
@@ -64,5 +72,7 @@ public interface ArticleService {
      * @return
      */
     boolean add(Article article, User currentUser);
+
+
 
 }

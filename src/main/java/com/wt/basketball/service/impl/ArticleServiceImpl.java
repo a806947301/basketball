@@ -4,12 +4,15 @@ package com.wt.basketball.service.impl;
 import com.wt.basketball.dao.ArticleMapper;
 import com.wt.basketball.model.Article;
 import com.wt.basketball.model.User;
+import com.wt.basketball.model.vo.ArticleDetailVo;
 import com.wt.basketball.model.vo.ArticleVo;
 import com.wt.basketball.service.ArticleService;
+import com.wt.basketball.service.CommonService;
 import com.wt.basketball.service.UserService;
 import com.wt.basketball.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +25,7 @@ import java.util.List;
  * @since 2021-03-18
  */
 @Service
+@Transactional
 public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
@@ -29,6 +33,9 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private CommonService commonService;
 
     @Resource
     private HttpServletRequest request;
@@ -61,6 +68,24 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public ArticleDetailVo getDetail(Integer id) {
+        // 增加阅读数
+        mapper.addRead(id);
+
+        Article article = mapper.get(id);
+        if (null == article) {
+            return null;
+        }
+
+        User user = userService.get(article.getUsername());
+
+        ArticleDetailVo vo = new ArticleDetailVo(article, user);
+
+        vo.setCommons(commonService.articleCommon(id));
+        return vo;
+    }
+
+    @Override
     public boolean delete(Integer id) {
         return mapper.delete(id);
     }
@@ -83,6 +108,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         return mapper.add(article);
     }
+
 
     /**
      * 查询vo

@@ -68,4 +68,8 @@
     <delete id="delete">
         delete from article where id = #{id}
     </delete>
+
+    <update id="addRead">
+        update article set `read` = `read` + 1 where id = #{id}
+    </update>
 </mapper>

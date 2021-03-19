@@ -3945,6 +3945,12 @@ hr {
 .btn.btn-color04:hover {
   background-color: #e2e7ea;
   color: #182730; }
+.btn.btn-color05 {
+  background-color: #98b85c;
+  color: #ffffff; }
+.btn.btn-color05:hover {
+  background-color: #5cb85c;
+  color: #FFFFFF; }
   .btn:focus {
     outline: none; }
   .btn i {

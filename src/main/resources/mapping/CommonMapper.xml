@@ -11,7 +11,6 @@
             content = #{content},
             createtime = #{createtime},
             username = #{username},
-            type = #{type},
             cwho = #{cwho},
         </set>
     </insert>
@@ -44,9 +43,6 @@
             </if>
             <if test="username != null and username != ''">
                 username = #{username},
-            </if>
-            <if test="type != null">
-                type = #{type},
             </if>
             <if test="cwho != null">
                 cwho = #{cwho}

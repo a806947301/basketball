@@ -12,6 +12,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
@@ -25,7 +26,7 @@ class CommonTests {
 
     @Test
     public void testSelect() {
-        boolean add = commonMapper.add(new Common("这是一个评论", new Date(), "wt", 1, 1));
+        boolean add = commonMapper.add(new Common("这是一个评论", new Date(), "wt", 1));
 
         Common common = commonMapper.get(1);
 
@@ -39,6 +40,17 @@ class CommonTests {
         boolean delete = commonMapper.delete(1);
 
         System.out.println(1);
+    }
+
+    @Test
+    public void add() {
+        Random r = new Random();
+        for (int i = 0; i < 100; i++) {
+            boolean add = commonMapper.add(new Common("这是一个评论" + r.nextInt(), new Date(), r.nextBoolean()? "wt" : "wt1", r.nextInt(50)));
+        }
+
+
+
     }
 
 }

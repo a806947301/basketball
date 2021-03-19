@@ -1,5 +1,7 @@
 package com.wt.basketball.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 /**
@@ -31,6 +33,7 @@ public class Yueball {
     /**
      * 创建时间
      */
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm")
     private Date createtime;
 
     /**

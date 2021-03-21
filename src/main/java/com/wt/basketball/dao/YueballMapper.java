@@ -1,6 +1,7 @@
 package com.wt.basketball.dao;
 
 import com.wt.basketball.model.Yueball;
+import com.wt.basketball.model.vo.FriendYueballDto;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,13 @@ public interface YueballMapper {
      * @return
      */
     List<Yueball> selectAll(@Param("text") String text, @Param("hot") Integer hot);
+
+    /**
+     * 查询与用户有关的球场，1.用户创建的球场，2用户约球的球场
+     * @param username
+     * @return
+     */
+    List<FriendYueballDto> selectByUser(@Param("username") String username);
 
     /**
      * 查一个
@@ -49,4 +57,21 @@ public interface YueballMapper {
      * @return
      */
     boolean yue(@Param("ballid") int ballid, @Param("username") String username);
+
+    /**
+     * 约球
+     * @param ballid 球场id
+     * @param username  用户
+     * @return
+     */
+    boolean unYue(@Param("ballid") int ballid, @Param("username") String username);
+
+
+    /**
+     * 添加约球次数
+     * @param ballid
+     * @param addnumber
+     * @return
+     */
+    boolean addYue(@Param("ballid") int ballid,@Param("addnumber") int addnumber);
 }

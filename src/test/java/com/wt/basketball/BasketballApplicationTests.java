@@ -28,16 +28,9 @@ class BasketballApplicationTests {
 
     @Test
     public void testSelect() {
-        List<User> users = userMapper.selectAll();
+        List<User> wt = userService.myFriend("wt");
 
-        userMapper.selectByBall(1);
-        User wt = userMapper.get("wt");
-
-
-//        boolean result = userMapper.add(new User("wt1", "1", "梧桐1", "13800138000", "wut1@qq.com", 0));
-
-        User wt1 = userService.login("wt", "123");
-        System.out.println(users);
+        System.out.println(1);
     }
 
 }

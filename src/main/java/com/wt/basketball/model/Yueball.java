@@ -51,6 +51,12 @@ public class Yueball {
     public Yueball() {
     }
 
+    public Yueball(String name, String placemsg, String imgsrc) {
+        this.name = name;
+        this.placemsg = placemsg;
+        this.imgsrc = imgsrc;
+    }
+
     public Yueball(String name, String imgsrc, String placemsg, Date createtime, Integer yue, String username, Integer hot) {
         this.name = name;
         this.imgsrc = imgsrc;

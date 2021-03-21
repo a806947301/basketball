@@ -11,7 +11,7 @@ public interface UserMapper {
     List<User> selectAll();
 
     /**
-     * 根据约球信息查询
+     * 根据约球球场查询与该球场有关的用户
      * @param ballid
      * @return
      */

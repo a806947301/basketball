@@ -1,14 +1,15 @@
 package com.wt.basketball.controller;
 
+import com.wt.basketball.common.AppException;
+import com.wt.basketball.common.BizResult;
 import com.wt.basketball.model.User;
 import com.wt.basketball.service.UserService;
 import com.wt.basketball.util.SessionUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -19,6 +20,9 @@ public class UserController {
     @Autowired
     private UserService service;
 
+    @Resource
+    private HttpServletRequest request;
+
     /**
      * 用户列表
      * @return
@@ -26,6 +30,20 @@ public class UserController {
     @GetMapping("/users")
     public List<User> users() {
         return service.search(null);
+    }
+
+    /**
+     * 我的球友
+     * @return
+     */
+    @GetMapping("/ballFriends")
+    public List<User> ballFriends() {
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser) {
+            return null;
+        }
+
+        return service.myFriend(currentUser.getUsername());
     }
 
     @PostMapping("/login")
@@ -61,6 +79,35 @@ public class UserController {
     public boolean logout(HttpServletRequest request) {
         request.getSession().setAttribute("user", null);
         return true;
+    }
+
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
+    @PutMapping("/register")
+    public BizResult register(User user) {
+        if (null == user) {
+            return BizResult.fall("不存在");
+        }
+       if (StringUtils.isEmpty(user.getUsername())) {
+           return BizResult.fall("用户名不能为空");
+       }
+       if (StringUtils.isEmpty(user.getNickname())) {
+           return BizResult.fall("昵称不能为空");
+       }
+       if (StringUtils.isEmpty(user.getPassword())) {
+           return BizResult.fall("密码不能为空");
+       }
+       if (StringUtils.isEmpty(user.getEmail())) {
+           return BizResult.fall("邮箱不能为空");
+       }
+       if (StringUtils.isEmpty(user.getPhone())) {
+           return BizResult.fall("手机号不能为空");
+       }
+
+       return BizResult.succ(service.register(user));
     }
 
     /**

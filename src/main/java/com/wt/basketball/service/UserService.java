@@ -18,7 +18,15 @@ public interface UserService {
      * @param password
      * @return  如果登录成功，则返回user对象
      */
-    public User  login(String username, String password);
+    public User login(String username, String password);
+
+
+    /**
+     * 注册
+     * @param user
+     * @return
+     */
+    public boolean register(User user);
 
     /**
      * 更新
@@ -33,4 +41,12 @@ public interface UserService {
      * @return
      */
     public List<User> search(Integer ballid);
+
+
+    /**
+     * 我的球友
+     * @param username 当前登录用户
+     * @return
+     */
+    public List<User> myFriend(String username);
 }

@@ -2,6 +2,8 @@ package com.wt.basketball.service;
 
 import com.wt.basketball.model.User;
 import com.wt.basketball.model.Yueball;
+import com.wt.basketball.model.vo.FriendYueballDto;
+import com.wt.basketball.model.vo.YueballDetailVo;
 import com.wt.basketball.model.vo.YueballVo;
 
 import java.util.List;
@@ -14,6 +16,15 @@ public interface YueballService {
      * @return
      */
     List<YueballVo> select(String text, Integer hot);
+
+    /**
+     * 查询
+     * @param username
+     * @return
+     */
+    List<FriendYueballDto> selectByUser(String username);
+
+
 
     /**
      * 更新
@@ -30,4 +41,33 @@ public interface YueballService {
      * @return
      */
     boolean delete(Integer id, User currentUser);
+
+    /**
+     * 添加
+     * @param yueball
+     * @param currentUser
+     * @return
+     */
+    boolean add(Yueball yueball, User currentUser);
+
+    /**
+     * 获取详情
+     * @param id
+     * @return
+     */
+    YueballDetailVo getYueballDetail(Integer id) ;
+
+    /**
+     * 约球
+     * @param ballid 球场id
+     * @return
+     */
+    boolean yue(Integer ballid);
+
+    /**
+     * 取消约球
+     * @param ballid 球场id
+     * @return
+     */
+    boolean unYue(Integer ballid);
 }

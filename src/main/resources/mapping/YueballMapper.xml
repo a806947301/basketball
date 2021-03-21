@@ -5,6 +5,7 @@
     <resultMap id="BaseResultMap" type="com.wt.basketball.model.Yueball">
     </resultMap>
 
+    <resultMap id="friendYueballDto" type="com.wt.basketball.model.vo.FriendYueballDto"></resultMap>
 
     <insert id="add">
         insert into yueball
@@ -32,6 +33,15 @@
             </if>
         </where>
         order by createtime desc
+    </select>
+
+    <select id="selectByUser" resultMap="friendYueballDto">
+        select yueball.id as id , yueball.name as name, yue.createtime  as yueTime, yueball.username as username   from yueball left join yue on yueball.id = yue.ballid
+        <where>
+            <if test="username != null and username != ''">
+                yueball.username = #{username} or yue.username = #{username}
+            </if>
+        </where>
     </select>
 
     <select id="get" resultMap="BaseResultMap">
@@ -74,4 +84,12 @@
         insert into yue values
         (#{ballid}, #{username}, now())
     </insert>
+
+    <delete id="unYue">
+        delete from yue where ballid = #{ballid} and username = #{username}
+    </delete>
+
+    <update id="addYue">
+        update yueball set yue = yue + (#{addnumber}) where id = #{ballid}
+    </update>
 </mapper>

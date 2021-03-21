@@ -4,7 +4,9 @@ import com.wt.basketball.dao.ArticleMapper;
 import com.wt.basketball.dao.YueballMapper;
 import com.wt.basketball.model.Article;
 import com.wt.basketball.model.Yueball;
+import com.wt.basketball.model.vo.FriendYueballDto;
 import com.wt.basketball.service.UserService;
+import com.wt.basketball.service.YueballService;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,31 +29,12 @@ class YueballTests {
     @Resource
     private YueballMapper yueballMapper;
 
+    private YueballService yueballService;
 
 
     @Test
     public void testSelect() {
-       // boolean addr = articleMapper.add(new Article("标题", "内容内容", new Date(), "wt", 1));
-
-//        List<Article> articles = articleMapper.selectAll("标2");
-
-        Yueball addY = new Yueball("xx球场", "/img/1.jpg", "球场详细信息在这里", new Date(), 10, "wt", 0);
-
-        boolean add = yueballMapper.add(addY);
-
-        Yueball yueball = yueballMapper.get(1);
-
-        List<Yueball> yueballs = yueballMapper.selectAll(null, 0);
-
-        Yueball y = new Yueball();
-        y.setId(1);
-        y.setPlacemsg("ballballball");
-        boolean update = yueballMapper.update(y);
-
-        boolean wt = yueballMapper.yue(1, "wt");
-
-        boolean delete = yueballMapper.delete(1);
-
+        List<FriendYueballDto> wt2 = yueballMapper.selectByUser("wt2");
 
         System.out.println(1);
     }

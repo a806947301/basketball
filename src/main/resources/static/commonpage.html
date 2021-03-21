@@ -271,10 +271,10 @@
                                             </div>
 
                                             <div class="tt-innerwrapper row" align="right" v-if="islogin">
-                                                <a :href="'writecommon.html?id='+n.id" class="tt-btn-icon col-4" v-if="n.myArticle || isadmin">
+                                                <a :href="'writecommon.html?id='+n.id" class="tt-btn-icon col-4" v-if="isadmin">
                                                     <span class="tt-badge tt-color07">修改</span>
                                                 </a>
-                                                <a href="javascript:void(0);" v-on:click="deleteCommon(n.id)" v-if="n.myArticle || isadmin"
+                                                <a href="javascript:void(0);" v-on:click="deleteCommon(n.id)" v-if="isadmin"
                                                    class="tt-btn-icon col-4">
                                                     <span class="tt-badge tt-color08">删除</span>
                                                 </a>

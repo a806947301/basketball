@@ -72,6 +72,8 @@ public class ArticleServiceImpl implements ArticleService {
         // 增加阅读数
         mapper.addRead(id);
 
+        User me = SessionUtil.getCurrentUser(request);
+
         Article article = mapper.get(id);
         if (null == article) {
             return null;
@@ -80,6 +82,13 @@ public class ArticleServiceImpl implements ArticleService {
         User user = userService.get(article.getUsername());
 
         ArticleDetailVo vo = new ArticleDetailVo(article, user);
+
+        // 是否我的文章
+        if (null != me && vo.getUsername().equals(me.getUsername())) {
+            vo.setMyArticle(true);
+        } else {
+            vo.setMyArticle(false);
+        }
 
         vo.setCommons(commonService.articleCommon(id));
         return vo;

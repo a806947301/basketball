@@ -11,6 +11,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="css/style.css">
 </head>
+<!--vue-->
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+<!--axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+<script>
+    function getQueryVariable(variable)
+    {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i=0;i<vars.length;i++) {
+            var pair = vars[i].split("=");
+            if(pair[0] == variable){return pair[1];}
+        }
+        return("");
+    }
+
+</script>
 <body>
 <!-- tt-mobile menu -->
 <nav class="panel-menu" id="mobile-menu">
@@ -30,7 +49,7 @@
     </div>
 </nav>
 <main id="tt-pageContent" class="tt-offset-none">
-    <div class="container">
+    <div class="container" id="regi">
         <div class="tt-loginpages-wrapper">
             <div class="tt-loginpages">
                 <a href="index.html" class="tt-block-title">
@@ -45,26 +64,26 @@
                 <form class="form-default">
                     <div class="form-group">
                         <label for="username">用户名</label>
-                        <input type="text" name="name" class="form-control" id="username" placeholder="azyrusmax">
+                        <input type="text" name="name" class="form-control" id="username" placeholder="azyrusmax" v-model="username">
                     </div>
                     <div class="form-group">
                         <label for="nickname">昵称</label>
-                        <input type="text" name="name" class="form-control" id="nickname" disabled v-model="user.username">
+                        <input type="text" name="name" class="form-control" id="nickname"  v-model="nickname">
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
-                        <input type="password" name="name" class="form-control" id="password" placeholder="************">
+                        <input type="password" name="name" class="form-control" id="password" placeholder="************" v-model="password">
                     </div>
                     <div class="form-group">
                         <label for="email">邮箱</label>
-                        <input type="text" name="name" class="form-control" id="email" placeholder="Sample@sample.com">
+                        <input type="text" name="name" class="form-control" id="email" placeholder="Sample@sample.com" v-model="email">
                     </div>
                     <div class="form-group">
                         <label for="phone">手机号</label>
-                        <input type="password" name="name" class="form-control" id="phone" placeholder="12345678901">
+                        <input type="password" name="name" class="form-control" id="phone" placeholder="12345678901" v-model="phone">
                     </div>
                     <div class="form-group">
-                        <a href="#" class="btn btn-secondary btn-block">创建我的账户</a>
+                        <a href="#" class="btn btn-secondary btn-block" v-on:click="regi">创建我的账户</a>
                     </div>
                     <p>已有账户?您可以现在登录 <a href="#" class="tt-underline">现在登录</a></p>
                     <div class="tt-notes">
@@ -76,6 +95,69 @@
         </div>
     </div>
 </main>
+
+<script>
+    regi = new Vue({
+        el: '#regi',
+        data: {
+            username:"",
+            password:"",
+            nickname:"",
+            email:"",
+            phone:""
+
+        },
+        methods: {
+            regi: function() {
+                if ("" == this.username) {
+                    alert("用户名不能为空")
+                    return;
+                }
+                if ("" == this.password) {
+                    alert("密码不能为空")
+                    return;
+                }
+                if ("" == this.nickname) {
+                    alert("昵称不能为空")
+                    return;
+                }
+                if ("" == this.email) {
+                    alert("邮箱不能为空")
+                    return;
+                }
+                if ("" == this.phone) {
+                    alert("手机号不能为空")
+                    return;
+                }
+                const params = new URLSearchParams();
+                params.append('username', regi.username);
+                params.append('password', regi.password);
+                params.append('nickname', regi.nickname);
+                params.append('email', regi.email);
+                params.append('phone', regi.phone);
+
+                axios.put("/user/register", params).then(function (response) {
+                    result = response.data;
+                    if (result.succ == true) {
+                        //    登录成功，跳转页面
+                        window.location.href="index.html";
+                    } else {
+                        alert(result.msg);
+                    }
+
+
+                    // window.location.href="index.html";
+                })
+
+            }
+        },
+        /*创建时调用*/
+        created: function () {
+
+        }
+    })
+</script>
+
 <script src="js/bundle.js"></script>
 <svg width="0" height="0" class="hidden">
 	 <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">

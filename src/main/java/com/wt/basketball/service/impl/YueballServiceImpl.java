@@ -87,6 +87,10 @@ public class YueballServiceImpl implements YueballService {
                 return false;
             }
         }
+
+        // 删除所有用户的约球信息
+        mapper.unYue(id, null);
+
         return mapper.delete(id);
     }
 

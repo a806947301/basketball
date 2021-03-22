@@ -59,9 +59,9 @@ public interface YueballMapper {
     boolean yue(@Param("ballid") int ballid, @Param("username") String username);
 
     /**
-     * 约球
-     * @param ballid 球场id
-     * @param username  用户
+     * 取消约球
+     * @param ballid 球场id(可为空)
+     * @param username  用户（可为空）
      * @return
      */
     boolean unYue(@Param("ballid") int ballid, @Param("username") String username);

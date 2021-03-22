@@ -89,7 +89,16 @@
     </insert>
 
     <delete id="unYue">
-        delete from yue where ballid = #{ballid} and username = #{username}
+        delete from yue
+        <where>
+            <if test="ballid != null">
+                ballid = #{ballid}
+            </if>
+            <if test="username != null and username != ''">
+                and username = #{username}
+            </if>
+        </where>
+
     </delete>
 
     <update id="addYue">

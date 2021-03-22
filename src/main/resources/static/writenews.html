@@ -30,6 +30,16 @@
         }
 
     </script>
+
+
+    <!--simditor-->
+    <link rel="stylesheet" type="text/css" href="/simditor/styles/simditor.css" />
+
+    <script type="text/javascript" src="simditor/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="simditor/scripts/simditor.js"></script>
 </head>
 <body>
 <!-- tt-mobile menu -->
@@ -180,7 +190,7 @@
                 </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">内容</h6>
-                    <div class="pt-row">
+                   <!-- <div class="pt-row">
                         <div class="col-left">
                             <ul class="pt-edit-btn">
                                 <li><button type="button" class="btn-icon">
@@ -261,10 +271,44 @@
                             <a href="#" class="btn btn-secondary btn-width-lg" v-if="isnew" v-on:click="add">添加新闻</a>
                             <a href="#" class="btn btn-secondary btn-width-lg" v-if="!isnew" v-on:click="update">修改新闻</a>
                         </div>
-                    </div>
+                    </div>-->
                 </div>
             </form>
+
+            <textarea id="editor" placeholder="Balabala" autofocus></textarea>
+
+            <br>
+            <div class="row" id="addButton">
+                <div class="col-auto ml-md-auto">
+                    <a href="#" class="btn btn-secondary btn-width-lg container-fluid" v-if="isnew" v-on:click="add">添加新闻</a>
+                    <a href="#" class="btn btn-secondary btn-width-lg container-fluid" v-if="!isnew" v-on:click="update">修改新闻</a>
+                </div>
+            </div>
             <script>
+
+                var editor = new Simditor({
+                    textarea: $('#editor'),
+                    toolbar:['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
+                        '|', 'ol', 'ul', 'blockquote', 'code', 'table',
+                        '|', 'link', 'hr',
+                        '|', 'indent', 'outdent', 'alignment']
+                    //optional options
+                });
+                addButton = new Vue({
+                    el:"#addButton",
+                    data:{
+                        isnew: true
+                    },
+                    methods: {
+                        add: function () {
+                            writeNews.add();
+                        },
+                        update: function () {
+                            writeNews.update();
+                        }
+                    }
+                })
+
                 writeNews = new Vue({
                     el: '#writeNews',
                     data: {
@@ -276,7 +320,7 @@
                             params = new URLSearchParams();
                             params.append("type", 3);
                             params.append("title", writeNews.article.title);
-                            params.append("content", writeNews.article.content);
+                            params.append("content", editor.getValue());
                             axios.put("/article/article", params)
                             .then(res=>{
                                 if (res.data == true) {
@@ -289,7 +333,7 @@
                         update: function () {
                             params = new URLSearchParams();
                             params.append("title", writeNews.article.title);
-                            params.append("content", writeNews.article.content);
+                            params.append("content", editor.getValue());
                             params.append("id", writeNews.article.id);
                             axios.post("/article/article", params)
                                 .then(res=>{
@@ -306,9 +350,11 @@
                         id = getQueryVariable("id");
                         if (id != "") {
                             this.isnew = false;
+                            addButton.isnew = false;
                             axios.get("/article/article?id=" + id)
                             .then(res=>{
                                 writeNews.article = res.data
+                                editor.setValue(writeNews.article.content)
                             })
                         }
                     }

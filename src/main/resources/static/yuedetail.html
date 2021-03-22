@@ -154,7 +154,7 @@
                                 if (currentUser.user != "") {
                                     currentUser.islogin = true;
                                     yueDetail.islogin =true;
-                                    addButton.islogin = true;
+                                    // addButton.islogin = true;
                                     if (currentUser.user.isadmin == 1) {
                                         yueDetail.isadmin = true;
                                     }
@@ -187,7 +187,12 @@
                         </div>
                         <h3 class="tt-item-title">
                             <a href="#">{{yueball.name}}</a>
+
                         </h3>
+                        <div align="right">
+                            <a :href="'writeyueball.html?id='+yueball.id" type="button" class="btn btn-color05 col-1">修改</a>
+                            <button type="button" class="btn btn-color03 col-1" v-on:click="deleteYueball">删除</button>
+                        </div>
                         <!--<div class="tt-item-tag">
                             <ul class="tt-list-badge">
                                 <li><a href="#"><span class="tt-color03 tt-badge">exchange</span></a></li>
@@ -325,7 +330,17 @@
                 commonContent: ""
             },
             methods: {
-
+                deleteYueball: function () {
+                    id = getQueryVariable("id")
+                    axios.delete("/yue/yueball?id=" + id)
+                        .then(res=>{
+                            if (res.data == true) {
+                                window.location.href="yueballpage.html";
+                                return ;
+                            }
+                            alert("删除失败，请登录后再试")
+                        })
+                },
                 yue: function () {
                     id = getQueryVariable("id")
                     axios.put("/yue/yue?id=" + id)

@@ -24,11 +24,18 @@ public class UserController {
     private HttpServletRequest request;
 
     /**
-     * 用户列表
+     * 用户列表（只有管理员才可以看）
      * @return
      */
     @GetMapping("/users")
     public List<User> users() {
+        // 只有管理员才能操作
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser || currentUser.getIsadmin() != 1) {
+            return null;
+        }
+
+
         return service.search();
     }
 

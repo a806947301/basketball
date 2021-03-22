@@ -26,7 +26,10 @@
             <if test="text != null and text != ''">
                 (name like concat("%", #{text}, "%")
                 or
-                placemsg like  concat("%", #{text}, "%"))
+                placemsg like  concat("%", #{text}, "%")
+                or
+                yue = #{text}
+                )
             </if>
             <if test="hot != null">
                 and hot = #{hot}

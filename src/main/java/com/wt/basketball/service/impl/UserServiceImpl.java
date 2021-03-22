@@ -51,8 +51,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean add(User user) {
+        return userMapper.add(user);
+    }
+
+    @Override
     public boolean update(User user) {
         return userMapper.update(user);
+    }
+
+    @Override
+    public boolean delete(String username) {
+        return userMapper.delete(username);
     }
 
     @Override
@@ -61,18 +71,31 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> search() {
+        return userMapper.selectAll();
+    }
+
+    @Override
     public List<User> myFriend(String username) {
         List<FriendYueballDto> dtos = yueballService.selectByUser(username);
 
         HashMap<String, FriendVo> users = new HashMap<>();
         for (FriendYueballDto dto : dtos) {
-            // 创建人也有关系
-            User user = userMapper.get(dto.getUsername());
-            users.put(user.getUsername(), new FriendVo(user, dto.getName(), dto.getId(), dto.getYueTime()));
 
             List<User> friends = search(dto.getId());
 
-            friends.stream().forEach(friend -> users.put(friend.getUsername(), new FriendVo(friend, dto.getName(), dto.getId(), dto.getYueTime())));
+            friends.stream().forEach(friend ->
+                    {
+                        FriendVo exist = users.get(friend.getUsername());
+                        if (null == exist) {
+                            users.put(friend.getUsername(),
+                                    new FriendVo(friend, dto));
+                        } else {
+                            exist.addBall(dto);
+                        }
+
+                    }
+            );
         }
 
         users.remove(username);

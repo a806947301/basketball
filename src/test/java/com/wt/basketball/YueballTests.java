@@ -39,6 +39,13 @@ class YueballTests {
         System.out.println(1);
     }
 
+    @Test
+    public void add() {
+        Yueball addY = new Yueball(  "test球场" , "/img/1.jpg", "球场详细信息在这里", new Date(), 0,  "wt1", 0);
+        boolean add = yueballMapper.add(addY);
+
+        System.out.println(1);
+    }
 
     @Test
     public void batchAdd() {

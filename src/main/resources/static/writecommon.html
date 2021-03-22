@@ -353,18 +353,66 @@
                         <hr>
                         <div class="form-group">
                             <label for="password">密码</label>
-                            <input type="password" name="name" class="form-control" id="password" placeholder="************">
+                            <input type="password" name="name" class="form-control" id="password" placeholder="************" v-model="password">
                         </div>
                     </form>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary container-fluid">修改我的密码</button>
+                <button type="button" class="btn btn-primary container-fluid" v-on:click="updatePassword">修改我的密码</button>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    editMeModal = new Vue({
+        el: '#editMeModal',
+        data: {
+            user:{},
+            password: null
+        },
+        methods: {
+            edit: function () {
+                const params = new URLSearchParams();
+                params.append('username', this.user.username);
+                params.append('nickname', this.user.nickname);
+                params.append('email', this.user.email);
+                params.append('phone', this.user.phone);
+
+                axios.post("/user/update", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data == true) {
+                            location.reload();
+                        } else {
+                            alert("您权限不足")
+                        }
+                    })
+            },
+            updatePassword: function() {
+                const params = new URLSearchParams();
+                params.append('username', this.user.username);
+                params.append('password', this.password);
+
+                axios.post("/user/update", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data == true) {
+                            location.reload();
+                        } else {
+                            alert("您权限不足")
+                        }
+                    })
+            }
+        },
+        /*创建时调用*/
+        created: function () {
+
+        }
+    })
+</script>
 <script src="js/bundle.js"></script>
 <svg width="0" height="0" class="hidden">
     <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">

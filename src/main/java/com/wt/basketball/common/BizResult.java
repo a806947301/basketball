@@ -27,8 +27,16 @@ public class BizResult<T> {
         return new BizResult<R>(true, result);
     }
 
+    public static BizResult SUCC() {
+        return new BizResult(true, null);
+    }
+
     public static BizResult fall(String result) {
         return new BizResult(false, null, result);
+    }
+
+    public static BizResult FALL() {
+        return new BizResult(false, null);
     }
 
     public BizResult(boolean succ, T result) {

@@ -7,7 +7,7 @@
 
     <resultMap id="friendYueballDto" type="com.wt.basketball.model.vo.FriendYueballDto"></resultMap>
 
-    <insert id="add">
+    <insert id="add" parameterType="com.wt.basketball.model.Yueball" useGeneratedKeys="true" keyProperty="id">
         insert into yueball
         <set>
             name = #{name},
@@ -36,10 +36,10 @@
     </select>
 
     <select id="selectByUser" resultMap="friendYueballDto">
-        select yueball.id as id , yueball.name as name, yue.createtime  as yueTime, yueball.username as username   from yueball left join yue on yueball.id = yue.ballid
+        select yueball.id as id , yueball.name as name, yueball.username as username from yueball left join yue on yueball.id = yue.ballid
         <where>
             <if test="username != null and username != ''">
-                yueball.username = #{username} or yue.username = #{username}
+                yue.username = #{username}
             </if>
         </where>
     </select>

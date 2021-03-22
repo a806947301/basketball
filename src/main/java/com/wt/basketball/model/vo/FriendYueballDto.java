@@ -14,11 +14,6 @@ public class FriendYueballDto {
     private String name;
 
     /**
-     * 约球时间
-     */
-    private Date yueTime;
-
-    /**
      * 约球信息创建人
      */
     private String username;
@@ -37,14 +32,6 @@ public class FriendYueballDto {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getYueTime() {
-        return yueTime;
-    }
-
-    public void setYueTime(Date yueTime) {
-        this.yueTime = yueTime;
     }
 
     public String getUsername() {

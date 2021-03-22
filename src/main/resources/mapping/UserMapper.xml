@@ -17,7 +17,7 @@
                 ballid = #{ballid}
             </if>
         </where>
-        order by yue.createtime desc
+        order by yue.createtime
     </select>
 
 

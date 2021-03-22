@@ -23,7 +23,7 @@ public interface YueballMapper {
     List<Yueball> selectAll(@Param("text") String text, @Param("hot") Integer hot);
 
     /**
-     * 查询与用户有关的球场，1.用户创建的球场，2用户约球的球场
+     * 查询用户约球的球场
      * @param username
      * @return
      */

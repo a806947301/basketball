@@ -229,8 +229,8 @@
                             <div class="tt-col-value-large hide-mobile">{{n.email}}</div>
                             <div class="tt-col-value-large hide-mobile">{{n.phone}}</div>
                             <div class="tt-col-value">
-                                <span class="tt-color15 tt-badge" data-toggle="modal" data-target="#editModal" >修改 </span>
-                                <span class="tt-color16 tt-badge">删除</span>
+                                <span class="tt-color15 tt-badge" data-toggle="modal" data-target="#editModal" v-on:click="edit(n)">修改 </span>
+                                <span class="tt-color16 tt-badge" v-on:click="deleteUser(n.username)">删除</span>
                             </div>
                         </div>
 
@@ -249,14 +249,21 @@
                 islogin: false
             },
             methods: {
-                deleteYueball: function (id) {
-                    axios.delete("/yue/yueball?id=" + id)
-                        .then(res=>{
-                            if (res.data == true) {
+                edit: function (user) {
+                    editModal.user = user;
+                    editModal.password = null;
+                },
+                deleteUser: function (username){
+
+
+                    axios.delete("/user/user?username=" + username)
+                        .then(function(response){
+                            console.log(response.data)
+                            if (response.data.succ == true) {
                                 location.reload();
-                                return ;
+                            } else {
+                                alert(response.data.msg)
                             }
-                            alert("删除失败，请登录后再试")
                         })
                 }
             },
@@ -307,50 +314,87 @@
 		</div>
 		<div class="form-group">
 		    <label for="settingsUserName">用户名</label>
-		   <input type="text" name="name" class="form-control" id="settingsUserName" placeholder="azyrusmax">
+		   <input type="text" name="name" class="form-control" id="settingsUserName" placeholder="azyrusmax" v-model="user.username">
 		</div>
         <div class="form-group">
             <label for="settingsUserPassword">密码</label>
-            <input type="password" name="name" class="form-control" id="settingsUserPassword" placeholder="************">
+            <input type="password" name="name" class="form-control" id="settingsUserPassword" placeholder="************" v-model="user.password">
         </div>
 		<div class="form-group">
 		    <label for="nickname">昵称</label>
-		   <input type="text" name="name" class="form-control" id="nickname" placeholder="xxxx">
+		   <input type="text" name="name" class="form-control" id="nickname" placeholder="xxxx" v-model="user.nickname">
 		</div>
 
         <div class="form-group">
             <label for="phone">手机号</label>
-            <input type="text" name="name" class="form-control" id="phone" placeholder="Slovakia">
+            <input type="text" name="name" class="form-control" id="phone" placeholder="Slovakia" v-model="user.phone">
         </div>
 
         <div class="form-group">
 		    <label for="email">邮箱</label>
-		   <input type="text" name="name" class="form-control" id="email" placeholder="Sample@sample.com">
+		   <input type="text" name="name" class="form-control" id="email" placeholder="Sample@sample.com" v-model="user.email">
 		</div>
 
-        <div class="checkbox-group">
-            <input type="checkbox" id="isadmin" name="checkbox">
-            <label for="isadmin">
-                <span class="check"></span>
-                <span class="box"></span>
-                <span class="tt-text">是否管理员</span>
-            </label>
+        <div class="form-group">
+            <label >角色</label>
+            <select class="form-control" v-model="user.isadmin">
+                <option value="0">普通用户</option>
+                <option value="1">管理员</option>
+            </select>
         </div>
 
 		<br>
 		<br>
 		<div class="form-group">
-			<a href="#" class="btn btn-secondary">Save</a>
+			<a href="javascript:void(0);" v-on:click="add" class="btn btn-secondary">Save</a>
 		</div>
 		</form>
 </div>
+<script>
+    addUser = new Vue({
+        el: '#js-popup-settings',
+        data: {
+            user:{}
+        },
+        methods: {
+            add: function () {
+                if (this.user.isadmin == null || this.user.isadmin == "") {
+                    alert("角色未选择");
+                    return ;
+                }
+                const params = new URLSearchParams();
+                params.append('username', this.user.username);
+                params.append('nickname', this.user.nickname);
+                params.append('email', this.user.email);
+                params.append('phone', this.user.phone);
+                params.append('password', this.user.password);
+                params.append('isadmin', this.user.isadmin);
+
+                axios.put("/user/user", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data.succ == true) {
+                            location.reload();
+                        } else {
+                            alert(response.data.msg)
+                        }
+                    })
+            }
+        },
+        /*创建时调用*/
+        created: function () {
+
+        }
+    })
+</script>
+
 
 <!--编辑用户-->
 <div class="modal fade " id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">编辑用户个人信息</h5>
+                <h5 class="modal-title" >编辑用户个人信息</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -375,30 +419,85 @@
                             <input type="password" name="name" class="form-control"  v-model="user.phone">
                         </div>
                         <div class="form-group">
+                            <label >角色</label>
+                            <select class="form-control" v-model="user.isadmin">
+                                <option value="0">普通用户</option>
+                                <option value="1">管理员</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <a href="javascript:void(0);" class="btn btn-secondary btn-block" v-on:click="edit">修改用户信息</a>
                         </div>
                         <hr>
                         <div class="form-group">
                             <label for="password">密码</label>
-                            <input type="password" name="name" class="form-control" id="password" placeholder="************">
+                            <input type="password" name="name" class="form-control" id="password" placeholder="************" v-model="password">
                         </div>
                     </form>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary container-fluid">修改密码</button>
+                <button type="button" class="btn btn-primary container-fluid" v-on:click="updatePassword">修改密码</button>
             </div>
         </div>
     </div>
 </div>
+<script>
+    editModal = new Vue({
+        el: '#editModal',
+        data: {
+            user:{},
+            password:null
+        },
+        methods: {
+            edit: function () {
+                const params = new URLSearchParams();
+                params.append('username', this.user.username);
+                params.append('nickname', this.user.nickname);
+                params.append('email', this.user.email);
+                params.append('phone', this.user.phone);
+                params.append('isadmin', this.user.isadmin);
+
+                axios.post("/user/user", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data.succ == true) {
+                            location.reload();
+                        } else {
+                            alert(response.data.msg)
+                        }
+                    })
+            },
+            updatePassword: function () {
+                const params = new URLSearchParams();
+                params.append('username', this.user.username);
+                params.append('password', this.password);
+
+                axios.post("/user/user", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data.succ == true) {
+                            location.reload();
+                        } else {
+                            alert(response.data.msg)
+                        }
+                    })
+            }
+        },
+        /*创建时调用*/
+        created: function () {
+
+        }
+    })
+</script>
 
 <!-- 编辑个人信息模态框（Modal） -->
 <div class="modal fade " id="editMeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog ">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" >编辑我的个人信息</h5>
+                <h5 class="modal-title" id="exampleModalLabel">编辑我的个人信息</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -411,48 +510,65 @@
                             <input type="text" name="name" class="form-control" id="username" disabled v-model="user.username">
                         </div>
                         <div class="form-group">
-                            <label >昵称</label>
-                            <input type="text" name="name" class="form-control"  v-model="user.nickname">
+                            <label for="nickname">昵称</label>
+                            <input type="text" name="name" class="form-control" id="nickname" v-model="user.nickname">
                         </div>
                         <div class="form-group">
-                            <label >邮箱</label>
-                            <input type="text" name="name" class="form-control"  v-model="user.email">
+                            <label for="email">邮箱</label>
+                            <input type="text" name="name" class="form-control" id="email" v-model="user.email">
                         </div>
                         <div class="form-group">
-                            <label>手机号</label>
-                            <input type="password" name="name" class="form-control"  v-model="user.phone">
+                            <label for="phone">手机号</label>
+                            <input type="password" name="name" class="form-control" id="phone" v-model="user.phone">
                         </div>
                         <div class="form-group">
-                            <a href="javascript:void(0);" class="btn btn-secondary btn-block" v-on:click="edit">修改我的账户</a>
+                            <a href="#" class="btn btn-secondary btn-block" v-on:click="edit">修改我的账户</a>
                         </div>
                         <hr>
                         <div class="form-group">
-                            <label>密码</label>
-                            <input type="password" name="name" class="form-control"  placeholder="************">
+                            <label for="password">密码</label>
+                            <input type="password" name="name" class="form-control" id="password" placeholder="************" v-model="password">
                         </div>
                     </form>
 
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary container-fluid">修改我的密码</button>
+                <button type="button" class="btn btn-primary container-fluid" v-on:click="updatePassword">修改我的密码</button>
             </div>
         </div>
     </div>
 </div>
+
 <script>
     editMeModal = new Vue({
         el: '#editMeModal',
         data: {
-            user:{}
+            user:{},
+            password: null
         },
         methods: {
             edit: function () {
                 const params = new URLSearchParams();
-                params.append('username', editMeModal.user.username);
-                params.append('nickname', editMeModal.user.nickname);
-                params.append('email', editMeModal.user.email);
-                params.append('phone', editMeModal.user.phone);
+                params.append('username', this.user.username);
+                params.append('nickname', this.user.nickname);
+                params.append('email', this.user.email);
+                params.append('phone', this.user.phone);
+
+                axios.post("/user/update", params)
+                    .then(function(response){
+                        console.log(response.data)
+                        if (response.data == true) {
+                            location.reload();
+                        } else {
+                            alert("您权限不足")
+                        }
+                    })
+            },
+            updatePassword: function() {
+                const params = new URLSearchParams();
+                params.append('username', this.user.username);
+                params.append('password', this.password);
 
                 axios.post("/user/update", params)
                     .then(function(response){

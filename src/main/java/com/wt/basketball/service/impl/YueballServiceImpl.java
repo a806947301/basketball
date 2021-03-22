@@ -92,11 +92,19 @@ public class YueballServiceImpl implements YueballService {
 
     @Override
     public boolean add(Yueball yueball, User currentUser) {
+        // 自己也添加进约球人列表
+
+
         yueball.setCreatetime(new Date());
         yueball.setHot(0);
         yueball.setUsername(currentUser.getUsername());
-        yueball.setYue(0);
-        return mapper.add(yueball);
+        yueball.setYue(1);
+        boolean addResult = mapper.add(yueball);
+
+        if (addResult) {
+            mapper.yue(yueball.getId(), currentUser.getUsername());
+        }
+        return addResult;
     }
 
     @Override

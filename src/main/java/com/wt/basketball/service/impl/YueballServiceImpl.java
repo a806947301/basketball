@@ -95,6 +95,15 @@ public class YueballServiceImpl implements YueballService {
     }
 
     @Override
+    public boolean deleteByUc(String username) {
+        List<FriendYueballDto> dtos = selectByUser(username);
+        for (FriendYueballDto dto : dtos) {
+            delete(dto.getId(), null);
+        }
+        return true;
+    }
+
+    @Override
     public boolean add(Yueball yueball, User currentUser) {
         // 自己也添加进约球人列表
 

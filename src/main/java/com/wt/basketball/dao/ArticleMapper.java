@@ -1,6 +1,7 @@
 package com.wt.basketball.dao;
 
 import com.wt.basketball.model.Article;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -43,6 +44,9 @@ public interface ArticleMapper {
      * @return
      */
     boolean delete(@Param("id") int id);
+
+    @Delete("delete from article where username = #{username}")
+    boolean deleteByUsername(@Param("username")String username);
 
     /**
      * 增加阅读数

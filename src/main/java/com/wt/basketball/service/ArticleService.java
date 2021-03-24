@@ -52,10 +52,18 @@ public interface ArticleService {
 
     /**
      * 删除文章
+     *
      * @param id
      * @return
      */
     boolean delete(Integer id);
+
+    /**
+     * 删除用户的所有文章
+     * @param username
+     * @return
+     */
+    boolean deleteByUc(String username);
 
     /**
      * 更新文章

@@ -6,6 +6,7 @@ import com.wt.basketball.model.User;
 import com.wt.basketball.model.Yueball;
 import com.wt.basketball.model.vo.FriendVo;
 import com.wt.basketball.model.vo.FriendYueballDto;
+import com.wt.basketball.service.ArticleService;
 import com.wt.basketball.service.UserService;
 import com.wt.basketball.service.YueballService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,10 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private YueballService yueballService;
+
+    @Autowired
+    private ArticleService articleService;
+
 
     @Override
     public User get(String username) {
@@ -62,6 +67,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean delete(String username) {
+        articleService.deleteByUc(username);
+        yueballService.deleteByUc(username);
         return userMapper.delete(username);
     }
 

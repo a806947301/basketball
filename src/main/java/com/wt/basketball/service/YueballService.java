@@ -43,6 +43,13 @@ public interface YueballService {
     boolean delete(Integer id, User currentUser);
 
     /**
+     * 删除用户的所有约球信息
+     * @param username
+     * @return
+     */
+    boolean deleteByUc(String username);
+
+    /**
      * 添加
      * @param yueball
      * @param currentUser

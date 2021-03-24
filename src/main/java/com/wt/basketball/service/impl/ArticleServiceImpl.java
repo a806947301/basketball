@@ -100,6 +100,11 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
+    public boolean deleteByUc(String username) {
+        return mapper.deleteByUsername(username);
+    }
+
+    @Override
     public boolean update(Article article, User currentUser) {
         Article old = mapper.get(article.getId());
         if (currentUser.getIsadmin() == 1 || old.getUsername().equals(currentUser.getUsername())) {

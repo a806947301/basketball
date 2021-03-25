@@ -87,7 +87,7 @@
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                       <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -210,6 +210,12 @@
                              <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
                             <span class="tt-text">{{article.read}}</span>
                         </a>
+
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addGood">
+                             <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
+                            <span class="tt-text">{{article.good}}</span>
+                        </a>
+
                         <div class="col-separator"></div>
                         <!--<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
                             <i class="tt-icon"><svg><use xlink:href="#icon-share"></use></svg></i>
@@ -247,17 +253,17 @@
                         {{n.content}}
                     </div>
                     <div class="tt-item-info info-bottom">
-                        <a href="javascript:void(0);" class="tt-icon-btn">
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addCGood(n)">
                             <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
-                            <span class="tt-text">0</span>
+                            <span class="tt-text">{{n.good}}</span>
                         </a>
-                        <a href="javascript:void(0);" class="tt-icon-btn">
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addCUnlike(n)">
                              <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
-                            <span class="tt-text">0</span>
+                            <span class="tt-text">{{n.unlike}}</span>
                         </a>
-                        <a href="javascript:void(0);" class="tt-icon-btn">
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addCLike(n)">
                              <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
-                            <span class="tt-text">0</span>
+                            <span class="tt-text">{{n.like}}</span>
                         </a>
                         <div class="col-separator"></div>
 
@@ -441,6 +447,50 @@
                             }
                             alert("删除失败")
                         })
+                },
+                addGood: function () {
+                    id = getQueryVariable("id")
+                    axios.post("/article/good?id=" + id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                articleDetail.article.good = articleDetail.article.good + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
+                },
+                addCGood: function (common) {
+                    axios.post("/common/good?id=" + common.id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                common.good = common.good + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
+
+                },
+                addCLike: function (common) {
+                    axios.post("/common/like?id=" + common.id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                common.like = common.like + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
+
+                },
+                addCUnlike: function (common) {
+                    axios.post("/common/unlike?id=" + common.id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                common.unlike = common.unlike + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
+
                 }
             },
             /*创建时调用*/

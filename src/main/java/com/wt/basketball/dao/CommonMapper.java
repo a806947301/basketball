@@ -41,4 +41,28 @@ public interface CommonMapper {
      * @return
      */
     boolean delete(@Param("id") int id);
+
+    /**
+     * 点赞
+     * @param id
+     * @return
+     */
+
+    boolean addGood(@Param("id") int id);
+
+    /**
+     * 喜欢
+     * @param id
+     * @return
+     */
+    boolean addLike(@Param("id") int id);
+
+    /**
+     * 喜欢
+     * @param id
+     * @return
+     */
+    boolean addUnlike(@Param("id") int id);
+
+
 }

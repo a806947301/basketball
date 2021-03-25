@@ -1,6 +1,7 @@
 package com.wt.basketball.service;
 
 import com.wt.basketball.model.Common;
+import com.wt.basketball.model.User;
 import com.wt.basketball.model.vo.CommonVo;
 
 import java.util.List;
@@ -31,4 +32,26 @@ public interface CommonService {
      * @return
      */
     boolean deleteCommon(int id);
+
+    /**
+     * 点赞
+     * @param id
+     * @return
+     */
+    boolean addGood(int id, User currentUser);
+
+    /**
+     * 喜欢
+     *
+     * @param id
+     * @return
+     */
+    boolean addLike(int id, User currentUser);
+
+    /**
+     * 不喜欢
+     * @param id
+     * @return
+     */
+    boolean addUnlike(int id, User currentUser);
 }

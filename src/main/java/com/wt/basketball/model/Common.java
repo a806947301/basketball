@@ -31,6 +31,16 @@ public class Common {
     private Integer good;
 
     /**
+     * 喜欢
+     */
+    private Integer like;
+
+    /**
+     * 不喜欢
+     */
+    private Integer unlike;
+
+    /**
      * 用户
      */
     private String username;
@@ -97,5 +107,21 @@ public class Common {
 
     public void setCwho(Integer cwho) {
         this.cwho = cwho;
+    }
+
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
+    }
+
+    public Integer getUnlike() {
+        return unlike;
+    }
+
+    public void setUnlike(Integer unlike) {
+        this.unlike = unlike;
     }
 }

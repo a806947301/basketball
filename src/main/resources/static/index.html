@@ -88,7 +88,7 @@
             <div class="col-auto ml-auto">
                  <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                         <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                        <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -274,13 +274,16 @@
                                                    <div class="tt-innerwrapper">
                                                        <a :href="'newsdetail.html?id='+n.id">{{n.title}}</a>
                                                    </div>
-                                                    <div class="row">
-                                                        <div class="tt-innerwrapper col-4">
+                                                    <div class="row" align="center">
+                                                        <!--<div class="tt-innerwrapper col-4">
                                                             <a href="#" class="tt-btn-icon">
                                                                 <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
                                                                 {{n.read}}
                                                             </a>
-                                                        </div>
+                                                        </div>-->
+                                                        <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
+                                                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i> <span class="tt-text">{{n.good}}</span></a>
+                                                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-view" style="background-color: #0F769F"></use></svg></i> <span class="tt-text">{{n.read}}</span></a>
                                                     </div>
 
                                                     <div class="tt-innerwrapper row" align="right" v-if="isadmin">

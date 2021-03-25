@@ -87,7 +87,7 @@
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                       <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -154,6 +154,7 @@
                                 if (currentUser.user != "") {
                                     currentUser.islogin = true;
                                     articlePage.islogin =true;
+                                    addButton.islogin =true;
                                     if (currentUser.user.isadmin == 1) {
                                         articlePage.isadmin = true;
 
@@ -169,21 +170,32 @@
     </div>
 </header>
 <main id="tt-pageContent">
-    <div class="container"  id="articlePage">
-        <div class="tt-topic-list tt-offset-top-30">
-            <div class="tt-list-search">
-                <div class="tt-title">技术区</div>
-                <!-- tt-search -->
+    <div class="tt-wrapper-section">
+        <div class="container">
+            <div class="tt-user-header">
+                <div class="tt-col-avatar">
+                    <div class="tt-icon">
+                        <svg class="tt-icon">
+                            <use xlink:href="#icon-ava-d"></use>
+                        </svg>
+                    </div>
+                </div>
+                <div class="tt-col-title">
+                    <div class="tt-title">
+                        技术区
+                    </div>
+                </div>
+
+                <!--搜索框-->
                 <div class="tt-search">
-                    <form class="search-wrapper" action="" id="searchForm">
+                    <form class="search-wrapper" action="">
                         <div class="search-form">
-                            <input type="text" class="tt-search__input" name="text" placeholder="输入查询的新闻">
+                            <input type="text" class="tt-search__input" name="text" placeholder="查询的技术文章">
                             <button class="tt-search__btn" type="submit">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-search"></use>
                                 </svg>
                             </button>
-
                             <button class="tt-search__close">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-cancel"></use>
@@ -191,20 +203,39 @@
                             </button>
                         </div>
                     </form>
-
-
                 </div>
-                <!-- /tt-search -->
+
+                <div class="tt-col-btn" id="addButton">
+                    <div class="tt-list-btn" v-if="islogin">
+                        <a href="javascript:void(0);" class="tt-btn-icon">
+                            <svg class="tt-icon">
+                                <use xlink:href="#icon-settings_fill"></use>
+                            </svg>
+                        </a>
+                        <a href="writetech.html" class="btn btn-secondary" >添加技术文章</a>
+                    </div>
+                </div>
+                <script>
+                    addButton = new Vue({
+                        el: '#addButton',
+                        data: {
+                            islogin: false
+                        }
+                    })
+                </script>
             </div>
+        </div>
+
+    </div>
+    <div class="container"  id="articlePage">
+        <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-header tt-border-bottom">
                 <div class="tt-col-topic">标题</div>
                 <div class="tt-col-category">用户名</div>
                 <div class="tt-col-category">日期</div>
                 <div class="tt-col-value hide-mobile">操作</div>
                 <div class="tt-col-value hide-mobile">
-                    <div class="tt-col-btn">
-                        <a href="writetech.html" class="btn btn-primary" v-if="islogin">add</a>
-                    </div>
+
                 </div>
                 <div class="tt-col-value" v-if="isadmin"></div>
             </div>
@@ -239,7 +270,7 @@
                     </a>
                 </div>
                 <div class="tt-col-value tt-color-select hide-mobile">
-                    <button type="button" class="btn btn-color03 "  v-if="n.myArticle || isadmin">删除</button>
+                    <button type="button" class="btn btn-color03 "  v-if="n.myArticle || isadmin" v-on:click="deleteTech(n.id)">删除</button>
                 </div>
 
                 <div class="tt-col-value" v-if="isadmin">

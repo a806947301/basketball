@@ -79,8 +79,13 @@ public interface ArticleService {
      * @param currentUser
      * @return
      */
-    boolean add(Article article, User currentUser);
+    Integer add(Article article, User currentUser);
 
-
+    /**
+     * 增加点赞数
+     * @param id
+     * @return
+     */
+    boolean addGood(Integer id, User currentUser);
 
 }

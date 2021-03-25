@@ -87,7 +87,7 @@
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                       <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -189,7 +189,7 @@
                             <a href="#">{{yueball.name}}</a>
 
                         </h3>
-                        <div align="right">
+                        <div align="right" v-if="yueball.myYue">
                             <a :href="'writeyueball.html?id='+yueball.id" type="button" class="btn btn-color05 col-1">修改</a>
                             <button type="button" class="btn btn-color03 col-1" v-on:click="deleteYueball">删除</button>
                         </div>
@@ -263,8 +263,8 @@
                                      </div>
                                  </div>
                                  <!--约了才能显示的信息-->
-                                 <div class="tt-col-value-large hide-mobile" v-if="yueball.meYue">12345678901</div>
-                                 <div class="tt-col-value-large hide-mobile" v-if="yueball.meYue">806947301@qq.com</div>
+                                 <div class="tt-col-value-large hide-mobile" v-if="yueball.meYue">{{n.phone}}</div>
+                                 <div class="tt-col-value-large hide-mobile" v-if="yueball.meYue">{{n.email}}</div>
 
                                  <!--没约展示的信息-->
                                  <div class="tt-col-value-large hide-mobile" v-if="!yueball.meYue">***********</div>

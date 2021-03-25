@@ -30,6 +30,16 @@
         }
 
     </script>
+
+
+    <!--simditor-->
+    <link rel="stylesheet" type="text/css" href="/simditor/styles/simditor.css" />
+
+    <script type="text/javascript" src="simditor/scripts/jquery.min.js"></script>
+    <script type="text/javascript" src="simditor/scripts/module.js"></script>
+    <script type="text/javascript" src="simditor/scripts/hotkeys.js"></script>
+    <script type="text/javascript" src="simditor/scripts/uploader.js"></script>
+    <script type="text/javascript" src="simditor/scripts/simditor.js"></script>
 </head>
 <body>
 <!-- tt-mobile menu -->
@@ -87,7 +97,7 @@
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                        <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -168,6 +178,7 @@
         <div class="tt-wrapper-inner">
             <h1 class="tt-title-border">
                 编写讨论区文章
+
             </h1>
             <form class="form-default form-create-topic" id="writeNews">
                 <div class="form-group">
@@ -180,91 +191,128 @@
                 </div>
                 <div class="pt-editor">
                     <h6 class="pt-title">内容</h6>
-                    <div class="pt-row">
-                        <div class="col-left">
-                            <ul class="pt-edit-btn">
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-quote"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-bold"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-italic"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-share_topic"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-blockquote"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-performatted"></use>
-                                    </svg>
-                                </button></li>
-                                <li class="hr"></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-upload_files"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-bullet_list"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-heading"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-horizontal_line"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-emoticon"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-settings"></use>
-                                    </svg>
-                                </button></li>
-                                <li><button type="button" class="btn-icon">
-                                    <svg class="tt-icon">
-                                        <use xlink:href="#icon-color_picker"></use>
-                                    </svg>
-                                </button></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="message" class="form-control" rows="5" placeholder="写下你的内容" v-model="article.content"></textarea>
-                    </div>
+                    <!-- <div class="pt-row">
+                         <div class="col-left">
+                             <ul class="pt-edit-btn">
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-quote"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-bold"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-italic"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-share_topic"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-blockquote"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-performatted"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li class="hr"></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-upload_files"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-bullet_list"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-heading"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-horizontal_line"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-emoticon"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-settings"></use>
+                                     </svg>
+                                 </button></li>
+                                 <li><button type="button" class="btn-icon">
+                                     <svg class="tt-icon">
+                                       <use xlink:href="#icon-color_picker"></use>
+                                     </svg>
+                                 </button></li>
+                             </ul>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <textarea name="message" class="form-control" rows="5" placeholder="写下你的内容" v-model="article.content"></textarea>
+                     </div>
 
-                    <div class="row">
-                        <div class="col-auto ml-md-auto">
-                            <a href="#" class="btn btn-secondary btn-width-lg" v-if="isnew" v-on:click="add">添加讨论区文章</a>
-                            <a href="#" class="btn btn-secondary btn-width-lg" v-if="!isnew" v-on:click="update">修改讨论区文章</a>
-                        </div>
-                    </div>
+                      <div class="row">
+                         <div class="col-auto ml-md-auto">
+                             <a href="#" class="btn btn-secondary btn-width-lg" v-if="isnew" v-on:click="add">添加新闻</a>
+                             <a href="#" class="btn btn-secondary btn-width-lg" v-if="!isnew" v-on:click="update">修改新闻</a>
+                         </div>
+                     </div>-->
                 </div>
             </form>
+
+            <textarea id="editor" placeholder="Balabala" autofocus></textarea>
+
+            <br>
+            <div class="row" id="addButton">
+                <div class="col-auto ml-md-auto">
+                    <a href="#" class="btn btn-secondary btn-width-lg container-fluid" v-if="isnew" v-on:click="add">添加讨论区文章</a>
+                    <a href="#" class="btn btn-secondary btn-width-lg container-fluid" v-if="!isnew" v-on:click="update">修改讨论区文章</a>
+                </div>
+            </div>
             <script>
+
+                var editor = new Simditor({
+                    textarea: $('#editor'),
+                    upload: {
+                        url: '/article/upload',
+                        params: null,
+                        fileKey: 'file',
+                        connectionCount: 1,
+                        leaveConfirm: '正在上传, 你确定要离开吗?'
+                    }
+                    //optional options
+                });
+                addButton = new Vue({
+                    el:"#addButton",
+                    data:{
+                        isnew: true
+                    },
+                    methods: {
+                        add: function () {
+                            writeNews.add();
+                        },
+                        update: function () {
+                            writeNews.update();
+                        }
+                    }
+                })
+
                 writeNews = new Vue({
                     el: '#writeNews',
                     data: {
@@ -276,20 +324,21 @@
                             params = new URLSearchParams();
                             params.append("type", 2);
                             params.append("title", writeNews.article.title);
-                            params.append("content", writeNews.article.content);
+                            params.append("content", editor.getValue());
                             axios.put("/article/article", params)
                                 .then(res=>{
-                                    if (res.data == true) {
-                                        window.location.href="index.html"
+                                    if (res.data.succ == true) {
+                                        window.location.href="commonpage.html"
+                                        return;
                                     } else {
-                                        alert("添加失败");
+                                        alert(res.data.msg)
                                     }
                                 })
                         },
                         update: function () {
                             params = new URLSearchParams();
                             params.append("title", writeNews.article.title);
-                            params.append("content", writeNews.article.content);
+                            params.append("content", editor.getValue());
                             params.append("id", writeNews.article.id);
                             axios.post("/article/article", params)
                                 .then(res=>{
@@ -306,9 +355,11 @@
                         id = getQueryVariable("id");
                         if (id != "") {
                             this.isnew = false;
+                            addButton.isnew = false;
                             axios.get("/article/article?id=" + id)
                                 .then(res=>{
                                     writeNews.article = res.data
+                                    editor.setValue(writeNews.article.content)
                                 })
                         }
                     }
@@ -413,6 +464,7 @@
         }
     })
 </script>
+
 <script src="js/bundle.js"></script>
 <svg width="0" height="0" class="hidden">
     <symbol aria-hidden="true" data-prefix="fab" data-icon="facebook-f" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 512" id="facebook-f-brands">

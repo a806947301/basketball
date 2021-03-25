@@ -1,5 +1,6 @@
 package com.wt.basketball.service.impl;
 
+import com.wt.basketball.common.MyUtil;
 import com.wt.basketball.dao.CommonMapper;
 import com.wt.basketball.model.Common;
 import com.wt.basketball.model.User;
@@ -91,5 +92,23 @@ public class CommonServiceImpl implements CommonService {
         }
 
         return mapper.delete(id);
+    }
+
+    @Override
+    public boolean addGood(int id, User currentUser) {
+        MyUtil.addGoodCommon(currentUser.getUsername(), id);
+        return mapper.addGood(id);
+    }
+
+    @Override
+    public boolean addLike(int id, User currentUser) {
+        MyUtil.addLikeCommon(currentUser.getUsername(), id);
+        return mapper.addLike(id);
+    }
+
+    @Override
+    public boolean addUnlike(int id, User currentUser) {
+        MyUtil.addUnlikeCommon(currentUser.getUsername(), id);
+        return mapper.addUnlike(id);
     }
 }

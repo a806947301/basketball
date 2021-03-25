@@ -1,6 +1,8 @@
 package com.wt.basketball.service.impl;
 
 
+import com.wt.basketball.common.AppException;
+import com.wt.basketball.common.MyUtil;
 import com.wt.basketball.dao.ArticleMapper;
 import com.wt.basketball.model.Article;
 import com.wt.basketball.model.User;
@@ -114,15 +116,24 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public boolean add(Article article, User currentUser) {
+    public Integer add(Article article, User currentUser) {
         article.setCreatetime(new Date());
         article.setPushhot(0);
         article.setRead(0);
         article.setUsername(currentUser.getUsername());
 
-        return mapper.add(article);
+        if (mapper.add(article)) {
+            return article.getId();
+        }
+
+        return null;
     }
 
+    @Override
+    public boolean addGood(Integer id, User currentUser) {
+        MyUtil.addGood(currentUser.getUsername(), id);
+        return mapper.addGood(id);
+    }
 
     /**
      * 查询vo

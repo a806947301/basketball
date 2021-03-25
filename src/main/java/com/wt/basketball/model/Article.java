@@ -52,6 +52,11 @@ public class Article {
      */
     private Integer type;
 
+    /**
+     * 点赞数
+     */
+    private Integer good;
+
     public Article() {
     }
 
@@ -138,5 +143,13 @@ public class Article {
 
     public void setType(Integer type) {
         this.type = type;
+    }
+
+    public Integer getGood() {
+        return good;
+    }
+
+    public void setGood(Integer good) {
+        this.good = good;
     }
 }

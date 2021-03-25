@@ -54,4 +54,17 @@
     <delete id="delete">
         delete from common where id = #{id}
     </delete>
+
+
+    <update id="addGood">
+        update common set `good` = `good` + 1 where id = #{id}
+    </update>
+
+    <update id="addLike">
+        update common set `like` = `like` + 1 where id = #{id}
+    </update>
+
+    <update id="addUnlike">
+        update common set `unlike` = `unlike` + 1 where id = #{id}
+    </update>
 </mapper>

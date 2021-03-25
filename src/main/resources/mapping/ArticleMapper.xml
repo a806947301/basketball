@@ -6,7 +6,7 @@
     </resultMap>
 
 
-    <insert id="add">
+    <insert id="add"  parameterType="com.wt.basketball.model.Article" useGeneratedKeys="true" keyProperty="id">
         insert into article
         <set>
             title = #{title},
@@ -71,5 +71,17 @@
 
     <update id="addRead">
         update article set `read` = `read` + 1 where id = #{id}
+    </update>
+
+    <update id="addGood">
+        update article set `good` = `good` + 1 where id = #{id}
+    </update>
+
+    <update id="addLike">
+        update article set `like` = `like` + 1 where id = #{id}
+    </update>
+
+    <update id="addUnlike">
+        update article set `unlike` = `unlike` + 1 where id = #{id}
     </update>
 </mapper>

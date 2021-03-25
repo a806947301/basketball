@@ -97,7 +97,7 @@
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                       <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -288,10 +288,13 @@
 
                 var editor = new Simditor({
                     textarea: $('#editor'),
-                    toolbar:['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color',
-                        '|', 'ol', 'ul', 'blockquote', 'code', 'table',
-                        '|', 'link', 'hr',
-                        '|', 'indent', 'outdent', 'alignment']
+                    upload: {
+                        url: '/article/upload',
+                        params: null,
+                        fileKey: 'file',
+                        connectionCount: 1,
+                        leaveConfirm: '正在上传, 你确定要离开吗?'
+                    }
                     //optional options
                 });
                 addButton = new Vue({
@@ -323,10 +326,11 @@
                             params.append("content", editor.getValue());
                             axios.put("/article/article", params)
                             .then(res=>{
-                                if (res.data == true) {
+                                if (res.data.succ == true) {
                                     window.location.href="index.html"
+                                    return;
                                 } else {
-                                    alert("添加失败");
+                                    alert(res.data.msg)
                                 }
                             })
                         },

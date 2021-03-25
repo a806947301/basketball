@@ -54,4 +54,11 @@ public interface ArticleMapper {
      * @return
      */
     boolean addRead(@Param("id") int id);
+
+    /**
+     * 增加点赞数
+     * @param id
+     * @return
+     */
+    boolean addGood(@Param("id") int id);
 }

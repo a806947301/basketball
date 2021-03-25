@@ -87,7 +87,7 @@
             <div class="col-auto ml-auto">
                 <div class="tt-user-info d-flex justify-content-center">
                     <a href="#" class="tt-btn-icon">
-                        <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
+                       <!-- <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i> -->
                     </a>
                     <div class="tt-avatar-icon tt-size-md">
                         <i class="tt-icon"><svg><use xlink:href="#icon-ava-a"></use></svg></i>
@@ -189,7 +189,7 @@
                 <div class="tt-search">
                     <form class="search-wrapper" action="">
                         <div class="search-form">
-                            <input type="text" class="tt-search__input" name="text" placeholder="输入搜索内容">
+                            <input type="text" class="tt-search__input" name="text" placeholder="查询的讨论文章">
                             <button class="tt-search__btn" type="submit">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-search"></use>
@@ -211,7 +211,7 @@
                               <use xlink:href="#icon-settings_fill"></use>
                             </svg>
                         </a>
-                        <a href="writecommon.html" class="btn btn-secondary" >添加</a>
+                        <a href="writecommon.html" class="btn btn-secondary" >添加讨论文章</a>
                     </div>
                 </div>
                 <script>
@@ -271,10 +271,10 @@
                                             </div>
 
                                             <div class="tt-innerwrapper row" align="right" v-if="islogin">
-                                                <a :href="'writecommon.html?id='+n.id" class="tt-btn-icon col-4" v-if="isadmin">
+                                                <a :href="'writecommon.html?id='+n.id" class="tt-btn-icon col-4" v-if="isadmin || n.myArticle">
                                                     <span class="tt-badge tt-color07">修改</span>
                                                 </a>
-                                                <a href="javascript:void(0);" v-on:click="deleteCommon(n.id)" v-if="isadmin"
+                                                <a href="javascript:void(0);" v-on:click="deleteCommon(n.id)" v-if="isadmin || n.myArticle"
                                                    class="tt-btn-icon col-4">
                                                     <span class="tt-badge tt-color08">删除</span>
                                                 </a>

@@ -88,4 +88,19 @@ public interface ArticleService {
      */
     boolean addGood(Integer id, User currentUser);
 
+    /**
+     * 喜欢
+     *
+     * @param id
+     * @return
+     */
+    boolean addLike(int id, User currentUser);
+
+    /**
+     * 不喜欢
+     * @param id
+     * @return
+     */
+    boolean addUnlike(int id, User currentUser);
+
 }

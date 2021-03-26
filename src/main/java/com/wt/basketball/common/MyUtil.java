@@ -7,6 +7,12 @@ import java.util.Map;
 public class MyUtil {
     /** 文章点赞 */
     private static Map<String, Integer> userGoodArticle = new HashMap<>();
+    /** 喜欢文章 */
+    private static Map<String, Integer> userLikeArticle = new HashMap<>();
+    /** 不喜欢文章 */
+    private static Map<String, Integer> userUnlikeArticle = new HashMap<>();
+
+
 
     /** 评论点赞 */
     private static Map<String, Integer> userGoodCommon = new HashMap<>();
@@ -52,5 +58,24 @@ public class MyUtil {
         }
 
         userUnlikeCommon.put(username + "-" + id, id);
+    }
+
+
+    public static void addLikeArticle(String username, Integer id) {
+        Integer article = userLikeArticle.get(username + "-" + id);
+        if (null != article) {
+            throw new AppException("您已喜欢");
+        }
+
+        userLikeArticle.put(username + "-" + id, id);
+    }
+
+    public static void addUnlikeArticle(String username, Integer id) {
+        Integer article = userUnlikeArticle.get(username + "-" + id);
+        if (null != article) {
+            throw new AppException("您已不喜欢");
+        }
+
+        userUnlikeArticle.put(username + "-" + id, id);
     }
 }

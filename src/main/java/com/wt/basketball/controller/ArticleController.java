@@ -208,6 +208,51 @@ public class ArticleController {
         return BizResult.FALL();
     }
 
+    /**
+     * 喜欢
+     * @param id
+     * @return
+     */
+    @PostMapping("/like")
+    public BizResult addLike(Integer id) {
+        if (null == id) {
+            return BizResult.fall("id不能为空");
+        }
+
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser) {
+            return BizResult.fall("请登录");
+        }
+
+        if (service.addLike(id, currentUser)) {
+            return BizResult.SUCC();
+        }
+        return BizResult.FALL();
+    }
+
+
+    /**
+     * 不喜欢
+     * @param id
+     * @return
+     */
+    @PostMapping("/unlike")
+    public BizResult addUnlike(Integer id) {
+        if (null == id) {
+            return BizResult.fall("id不能为空");
+        }
+
+        User currentUser = SessionUtil.getCurrentUser(request);
+        if (null == currentUser) {
+            return BizResult.fall("请登录");
+        }
+
+        if (service.addUnlike(id, currentUser)) {
+            return BizResult.SUCC();
+        }
+        return BizResult.FALL();
+    }
+
     @RequestMapping("/upload")
     public Map uploadImg(MultipartFile file) throws Exception{
 

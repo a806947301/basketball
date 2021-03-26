@@ -210,6 +210,22 @@
                             <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
                             <span class="tt-text">{{article.read}}</span>
                         </a>
+
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addGood">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i>
+                            <span class="tt-text">{{article.good}}</span>
+                        </a>
+
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addUnlike">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i>
+                            <span class="tt-text">{{article.unlike}}</span>
+                        </a>
+
+                        <a href="javascript:void(0);" class="tt-icon-btn" v-on:click="addLike">
+                            <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+                            <span class="tt-text">{{article.like}}</span>
+                        </a>
+
                         <div class="col-separator"></div>
                         <!--<a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
                             <i class="tt-icon"><svg><use xlink:href="#icon-share"></use></svg></i>
@@ -298,7 +314,7 @@
                 <h6 class="pt-title">编写你的评论</h6>
                 <div class="pt-row">
                     <div class="col-left">
-                        <ul class="pt-edit-btn">
+                        <!--<ul class="pt-edit-btn">
                             <li><button type="button" class="btn-icon">
                                 <svg class="tt-icon">
                                     <use xlink:href="#icon-quote"></use>
@@ -365,7 +381,7 @@
                                     <use xlink:href="#icon-color_picker"></use>
                                 </svg>
                             </button></li>
-                        </ul>
+                        </ul>-->
                     </div>
                     <div class="col-right tt-hidden-mobile">
                         <a href="#" class="btn btn-primary">回到最上面</a>
@@ -442,6 +458,17 @@
                             alert("删除失败")
                         })
                 },
+                addGood: function () {
+                    id = getQueryVariable("id")
+                    axios.post("/article/good?id=" + id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                articleDetail.article.good = articleDetail.article.good + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
+                },
                 addCGood: function (common) {
                     axios.post("/common/good?id=" + common.id)
                         .then(res=>{
@@ -474,6 +501,28 @@
                             alert(res.data.msg)
                         })
 
+                },
+                addUnlike : function () {
+                    id = getQueryVariable("id")
+                    axios.post("/article/unlike?id=" + id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                articleDetail.article.unlike = articleDetail.article.unlike + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
+                },
+                addLike: function (){
+                    id = getQueryVariable("id")
+                    axios.post("/article/like?id=" + id)
+                        .then(res=>{
+                            if (res.data.succ == true) {
+                                articleDetail.article.like = articleDetail.article.like + 1;
+                                return;
+                            }
+                            alert(res.data.msg)
+                        })
                 }
             },
             /*创建时调用*/

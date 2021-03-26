@@ -208,9 +208,10 @@
                 <div class="tt-col-btn" id="addButton">
                     <div class="tt-list-btn" v-if="islogin">
                         <a href="javascript:void(0);" class="tt-btn-icon">
-                            <svg class="tt-icon">
+                            &nbsp;
+                            <!--<svg class="tt-icon">
                                 <use xlink:href="#icon-settings_fill"></use>
-                            </svg>
+                            </svg>-->
                         </a>
                         <a href="writetech.html" class="btn btn-secondary" >添加技术文章</a>
                     </div>
@@ -231,6 +232,7 @@
         <div class="tt-topic-list tt-offset-top-30">
             <div class="tt-list-header tt-border-bottom">
                 <div class="tt-col-topic">标题</div>
+                <div class="tt-col-topic"></div>
                 <div class="tt-col-category">用户名</div>
                 <div class="tt-col-category">日期</div>
                 <div class="tt-col-value hide-mobile">操作</div>
@@ -251,7 +253,7 @@
                     <h6 class="tt-title"><a :href="'techdetail.html?id='+n.id">
                         {{n.title}}
                     </a></h6>
-                    <div class="row align-items-center no-gutters hide-desktope">
+                    <!--<div class="row align-items-center no-gutters hide-desktope">
                         <div class="col-auto">
                             <ul class="tt-list-badge">
                                 <li class="show-mobile"><a href="#"><span class="tt-color05 tt-badge">music</span></a></li>
@@ -260,9 +262,23 @@
                         <div class="col-auto ml-auto show-mobile">
                            <div class="tt-value">1d</div>
                         </div>
+                    </div>-->
+                </div>
+                <div class="tt-col-description">
+                    <div class="row" align="center">
+                        <!--<div class="tt-innerwrapper col-4">
+                            <a href="#" class="tt-btn-icon">
+                                <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
+                                {{n.read}}
+                            </a>
+                        </div>-->
+                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-view" style="background-color: #0F769F"></use></svg></i> <span class="tt-text">{{n.read}}</span></a>
+                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i> <span class="tt-text">{{n.good}}</span></a>
+                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i> <span class="tt-text">{{n.unlike}}</span></a>
+                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-favorite" style="background-color: #0F769F"></use></svg></i> <span class="tt-text">{{n.like}}</span></a>
                     </div>
                 </div>
-                <div class="tt-col-category"><span class="tt-color06 tt-badge">{{n.user.nickname}}</span></div>
+                <div class="tt-col-category" align="center"><span class="tt-color06 tt-badge">{{n.user.nickname}}</span></div>
                 <div class="tt-col-category">{{n.createtime}}</div>
                 <div class="tt-col-value hide-mobile">
                     <a :href="'writetech.html?id='+n.id" class="btn btn-secondary btn-secondary btn-block" v-if="n.myArticle || isadmin">

@@ -207,9 +207,10 @@
                 <div class="tt-col-btn" id="addButton">
                     <div class="tt-list-btn" v-if="islogin">
                         <a href="javascript:void(0);" class="tt-btn-icon">
-                            <svg class="tt-icon">
+                            &nbsp;
+                           <!-- <svg class="tt-icon">
                               <use xlink:href="#icon-settings_fill"></use>
-                            </svg>
+                            </svg>-->
                         </a>
                         <a href="writecommon.html" class="btn btn-secondary" >添加讨论文章</a>
                     </div>
@@ -249,6 +250,7 @@
                                 <div class="col-md-6 col-lg-6" v-for="n in list">
                                     <div class="tt-item">
                                         <div class="tt-item-header">
+
                                             <a href="javascript:void(0);" class=" tt-icon-avatar">
                                                 <svg><use xlink:href="#icon-ava-u"></use></svg>
                                                 {{n.user.nickname}}
@@ -258,16 +260,23 @@
                                         </div>
                                         <div class="tt-item-layout">
                                            <div class="tt-innerwrapper mystyle">
-                                               <a :href="'commondetail.html?id='+n.id">
-                                                   {{n.title}}
-                                               </a>
+                                               <h3>
+                                                   <a :href="'commondetail.html?id='+n.id">
+                                                       {{n.title}}
+                                                   </a>
+                                               </h3>
+                                               <br>
                                            </div>
 
-                                           <div class="tt-innerwrapper">
-                                                <a href="javascript:void(0);" class="tt-btn-icon">
-                                                    <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
-                                                    {{n.read}}
-                                                </a>
+                                           <div class="tt-innerwrapper" align="center">
+
+                                               <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i> <span class="tt-text">{{n.read}}</span></a>
+
+                                               <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i> <span class="tt-text">{{n.like}}</span></a>
+
+                                               <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i> <span class="tt-text">{{n.unlike}}</span></a>
+
+                                               <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-favorite" style="background-color: #0F769F"></use></svg></i> <span class="tt-text">{{n.like}}</span></a>
                                             </div>
 
                                             <div class="tt-innerwrapper row" align="right" v-if="islogin">

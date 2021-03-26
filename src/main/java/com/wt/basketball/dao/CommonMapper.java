@@ -58,7 +58,7 @@ public interface CommonMapper {
     boolean addLike(@Param("id") int id);
 
     /**
-     * 喜欢
+     * 不喜欢
      * @param id
      * @return
      */

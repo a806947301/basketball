@@ -163,4 +163,16 @@ public class ArticleServiceImpl implements ArticleService {
 
         return result;
     }
+
+    @Override
+    public boolean addLike(int id, User currentUser) {
+        MyUtil.addLikeArticle(currentUser.getUsername(), id);
+        return mapper.addLike(id);
+    }
+
+    @Override
+    public boolean addUnlike(int id, User currentUser) {
+        MyUtil.addUnlikeArticle(currentUser.getUsername(), id);
+        return mapper.addUnlike(id);
+    }
 }

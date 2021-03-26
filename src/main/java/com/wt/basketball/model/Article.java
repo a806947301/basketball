@@ -57,6 +57,16 @@ public class Article {
      */
     private Integer good;
 
+    /**
+     * 喜欢
+     */
+    private Integer like;
+
+    /**
+     * 不喜欢
+     */
+    private Integer unlike;
+
     public Article() {
     }
 
@@ -151,5 +161,21 @@ public class Article {
 
     public void setGood(Integer good) {
         this.good = good;
+    }
+
+    public Integer getLike() {
+        return like;
+    }
+
+    public void setLike(Integer like) {
+        this.like = like;
+    }
+
+    public Integer getUnlike() {
+        return unlike;
+    }
+
+    public void setUnlike(Integer unlike) {
+        this.unlike = unlike;
     }
 }

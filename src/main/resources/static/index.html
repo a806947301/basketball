@@ -298,6 +298,8 @@
                                                         <a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                                                         <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-like"></use></svg></i> <span class="tt-text">{{n.good}}</span></a>
                                                         <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-view" style="background-color: #0F769F"></use></svg></i> <span class="tt-text">{{n.read}}</span></a>
+                                                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-dislike"></use></svg></i> <span class="tt-text">{{n.unlike}}</span></a>
+                                                        <a href="javascript:void(0);" class="tt-icon-btn"><i class="tt-icon"><svg><use xlink:href="#icon-favorite" style="background-color: #0F769F"></use></svg></i> <span class="tt-text">{{n.like}}</span></a>
                                                     </div>
 
                                                     <div class="tt-innerwrapper row" align="right" v-if="isadmin">
@@ -390,11 +392,11 @@
                                                 </div>
                                                 <!--一条推荐-->
                                                 <div class="tt-col-description" v-for="n in list">
-                                                    <h6 class="tt-title">
+                                                    <h4 class="tt-title">
                                                         <a :href="'commondetail.html?id=' + n.id">
                                                         {{n.title}}
                                                     </a>
-                                                    </h6>
+                                                    </h4>
                                                 </div>
 
                                             </div>

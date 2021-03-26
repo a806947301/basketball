@@ -5,6 +5,8 @@ import com.wt.basketball.common.BizResult;
 import com.wt.basketball.model.User;
 import com.wt.basketball.service.UserService;
 import com.wt.basketball.util.SessionUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,8 @@ import java.util.List;
 @RequestMapping("/user")
 @RestController
 public class UserController {
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService service;
@@ -59,6 +63,7 @@ public class UserController {
 
         // 登录成功则添加session并返回true
         if (null != login) {
+            logger.info("用户登录：{}, 登录ip：{}" ,username, request.getRemoteAddr());
             request.getSession().setAttribute("user", login);
             return true;
         }
